@@ -21,6 +21,17 @@
 		529400571A02884100F93C54 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529400391A02884000F93C54 /* UIKit.framework */; };
 		5294005F1A02884100F93C54 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5294005D1A02884100F93C54 /* InfoPlist.strings */; };
 		529400611A02884100F93C54 /* ChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 529400601A02884100F93C54 /* ChatAppTests.m */; };
+		84EBCCAA1A02DE7500C97E72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */; };
+		84EBCCAC1A02DEBC00C97E72 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */; };
+		84EBCCAE1A02DEE400C97E72 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAD1A02DEE400C97E72 /* CoreLocation.framework */; };
+		84EBCCB01A02DEFE00C97E72 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAF1A02DEFE00C97E72 /* libz.dylib */; };
+		84EBCCB21A02DF0E00C97E72 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCB11A02DF0E00C97E72 /* MobileCoreServices.framework */; };
+		84EBCCB41A02DF2000C97E72 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCB31A02DF2000C97E72 /* QuartzCore.framework */; };
+		84EBCCB61A02DF3000C97E72 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCB51A02DF3000C97E72 /* Security.framework */; };
+		84EBCCB81A02DF3600C97E72 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCB71A02DF3600C97E72 /* StoreKit.framework */; };
+		84EBCCBA1A02DF4500C97E72 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCB91A02DF4500C97E72 /* SystemConfiguration.framework */; };
+		84EBCCBE1A02E3F000C97E72 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCBD1A02E3F000C97E72 /* Parse.framework */; };
+		84EBCCC01A02E3F100C97E72 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCBF1A02E3F100C97E72 /* Bolts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +64,17 @@
 		5294005C1A02884100F93C54 /* ChatAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChatAppTests-Info.plist"; sourceTree = "<group>"; };
 		5294005E1A02884100F93C54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		529400601A02884100F93C54 /* ChatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAppTests.m; sourceTree = "<group>"; };
+		84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		84EBCCAD1A02DEE400C97E72 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		84EBCCAF1A02DEFE00C97E72 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		84EBCCB11A02DF0E00C97E72 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		84EBCCB31A02DF2000C97E72 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		84EBCCB51A02DF3000C97E72 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		84EBCCB71A02DF3600C97E72 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		84EBCCB91A02DF4500C97E72 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		84EBCCBD1A02E3F000C97E72 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		84EBCCBF1A02E3F100C97E72 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +82,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84EBCCBA1A02DF4500C97E72 /* SystemConfiguration.framework in Frameworks */,
+				84EBCCB81A02DF3600C97E72 /* StoreKit.framework in Frameworks */,
+				84EBCCB61A02DF3000C97E72 /* Security.framework in Frameworks */,
+				84EBCCB41A02DF2000C97E72 /* QuartzCore.framework in Frameworks */,
+				84EBCCB21A02DF0E00C97E72 /* MobileCoreServices.framework in Frameworks */,
+				84EBCCB01A02DEFE00C97E72 /* libz.dylib in Frameworks */,
+				84EBCCBE1A02E3F000C97E72 /* Parse.framework in Frameworks */,
+				84EBCCAE1A02DEE400C97E72 /* CoreLocation.framework in Frameworks */,
 				529400381A02884000F93C54 /* CoreGraphics.framework in Frameworks */,
+				84EBCCAC1A02DEBC00C97E72 /* CFNetwork.framework in Frameworks */,
+				84EBCCAA1A02DE7500C97E72 /* AudioToolbox.framework in Frameworks */,
 				5294003A1A02884000F93C54 /* UIKit.framework in Frameworks */,
 				529400361A02884000F93C54 /* Foundation.framework in Frameworks */,
+				84EBCCC01A02E3F100C97E72 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +134,17 @@
 		529400341A02884000F93C54 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84EBCCBF1A02E3F100C97E72 /* Bolts.framework */,
+				84EBCCBD1A02E3F000C97E72 /* Parse.framework */,
+				84EBCCB91A02DF4500C97E72 /* SystemConfiguration.framework */,
+				84EBCCB71A02DF3600C97E72 /* StoreKit.framework */,
+				84EBCCB51A02DF3000C97E72 /* Security.framework */,
+				84EBCCB31A02DF2000C97E72 /* QuartzCore.framework */,
+				84EBCCB11A02DF0E00C97E72 /* MobileCoreServices.framework */,
+				84EBCCAF1A02DEFE00C97E72 /* libz.dylib */,
+				84EBCCAD1A02DEE400C97E72 /* CoreLocation.framework */,
+				84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */,
+				84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */,
 				529400351A02884000F93C54 /* Foundation.framework */,
 				529400371A02884000F93C54 /* CoreGraphics.framework */,
 				529400391A02884000F93C54 /* UIKit.framework */,
@@ -376,6 +420,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatApp/ChatApp-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/ChatApp-Info.plist";
@@ -389,6 +437,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatApp/ChatApp-Prefix.pch";
 				INFOPLIST_FILE = "ChatApp/ChatApp-Info.plist";
@@ -456,6 +508,7 @@
 				529400661A02884100F93C54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		529400671A02884100F93C54 /* Build configuration list for PBXNativeTarget "ChatAppTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +517,7 @@
 				529400691A02884100F93C54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
