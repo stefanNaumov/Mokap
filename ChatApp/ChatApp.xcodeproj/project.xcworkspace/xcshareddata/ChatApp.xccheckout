@@ -10,31 +10,31 @@
 	<string>ChatApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>09F096A7-82F2-4268-A01B-E3CFED7B0820</key>
-		<string>https://github.com/RadvachTsvetkov/Mokap---iOS-Mobile-Development.git</string>
+		<key>C147BBA0D9829FE4E080FED21BB6929F0B49CEB7</key>
+		<string>https://github.com/stefanNaumov/Mokap.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ChatApp/ChatApp.xcodeproj/project.xcworkspace</string>
+	<string>ChatApp/ChatApp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>09F096A7-82F2-4268-A01B-E3CFED7B0820</key>
+		<key>C147BBA0D9829FE4E080FED21BB6929F0B49CEB7</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/RadvachTsvetkov/Mokap---iOS-Mobile-Development.git</string>
+	<string>https://github.com/stefanNaumov/Mokap.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>09F096A7-82F2-4268-A01B-E3CFED7B0820</string>
+	<string>C147BBA0D9829FE4E080FED21BB6929F0B49CEB7</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>09F096A7-82F2-4268-A01B-E3CFED7B0820</string>
+			<string>C147BBA0D9829FE4E080FED21BB6929F0B49CEB7</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Mokap---iOS-Mobile-Development</string>
+			<string>TeamWork</string>
 		</dict>
 	</array>
 </dict>
