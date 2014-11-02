@@ -14,7 +14,10 @@
 
 @implementation MainViewController{
     PFUser *user;
+    
 }
+
+static NSString *usersTableViewSegue = @"usersTableViewSegue";
 
 - (void)viewDidLoad
 {
@@ -45,7 +48,7 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         UIAlertView *loginAlertView;
         if (!error) {
-            loginAlertView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Logged in!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            loginAlertView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Logged in!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [loginAlertView show];
         }
         else{
@@ -57,6 +60,34 @@
     //clear inputs
     self.userNameInput.text = @"";
     self.passwordInput.text = @"";
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        
+        [self performSegueWithIdentifier:usersTableViewSegue sender:nil];
+    }
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    
+    if ([segue.identifier isEqualToString:usersTableViewSegue]) {
+        PFQuery *query = [PFUser query];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                UsersTableViewController *controller = [segue destinationViewController];
+                [controller setUsers:objects];
+                [controller.tableView reloadData];
+            }
+            else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not connect to server!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+            
+        }];
+    }
+    
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "UsersTableViewController.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController<UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userNameInput;
 @property (weak, nonatomic) IBOutlet UITextField *passwordInput;
 - (IBAction)logInTouchUp:(id)sender;

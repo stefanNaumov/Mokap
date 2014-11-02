@@ -29,7 +29,7 @@
 }
 
 -(BOOL) verifyPassword:(NSString *)password withPassword:(NSString *)passwordForVerification{
-    if ([password isEqualToString:passwordForVerification]) {
+    if (![password isEqualToString:passwordForVerification]) {
         return FALSE;
     }
     

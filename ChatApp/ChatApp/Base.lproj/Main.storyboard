@@ -73,11 +73,12 @@
                     <connections>
                         <outlet property="passwordInput" destination="Dv9-fA-LdN" id="dWd-me-272"/>
                         <outlet property="userNameInput" destination="9hh-Kv-ACE" id="9oe-uc-92W"/>
+                        <segue destination="KvM-gu-W5Q" kind="modal" identifier="usersTableViewSegue" id="Naf-dQ-6ql"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1" y="139"/>
+            <point key="canvasLocation" x="-457" y="-192"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="5wY-oa-wdc">
@@ -148,11 +149,38 @@
                         <outlet property="passwordInput" destination="6J9-zF-qbp" id="eEr-xX-OVL"/>
                         <outlet property="userNameInput" destination="ZUW-Gc-a5c" id="REe-5v-PWG"/>
                         <outlet property="verifyPasswordInput" destination="Ktl-2b-q0d" id="TTa-OU-ZJf"/>
+                        <segue destination="KvM-gu-W5Q" kind="modal" identifier="usersTableViewSegue" id="jKy-q4-Ywy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hky-Of-HF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="441" y="134"/>
+            <point key="canvasLocation" x="-15" y="-192"/>
+        </scene>
+        <!--Users Table View Controller-->
+        <scene sceneID="Rk5-1s-knX">
+            <objects>
+                <tableViewController id="KvM-gu-W5Q" customClass="UsersTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="EaY-7p-Rgu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="bgq-O5-erl">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bgq-O5-erl" id="whO-5F-iLd">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="KvM-gu-W5Q" id="YHl-vi-s4v"/>
+                            <outlet property="delegate" destination="KvM-gu-W5Q" id="6gR-ye-hTw"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rab-ld-6m8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-201" y="498"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -160,4 +188,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Naf-dQ-6ql"/>
+    </inferredMetricsTieBreakers>
 </document>
