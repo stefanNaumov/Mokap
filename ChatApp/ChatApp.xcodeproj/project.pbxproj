@@ -14,13 +14,14 @@
 		529400421A02884000F93C54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 529400411A02884000F93C54 /* main.m */; };
 		529400461A02884000F93C54 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 529400451A02884000F93C54 /* AppDelegate.m */; };
 		529400491A02884000F93C54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 529400471A02884000F93C54 /* Main.storyboard */; };
-		5294004C1A02884100F93C54 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294004B1A02884100F93C54 /* ViewController.m */; };
+		5294004C1A02884100F93C54 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5294004B1A02884100F93C54 /* MainViewController.m */; };
 		5294004E1A02884100F93C54 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5294004D1A02884100F93C54 /* Images.xcassets */; };
 		529400551A02884100F93C54 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529400541A02884100F93C54 /* XCTest.framework */; };
 		529400561A02884100F93C54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529400351A02884000F93C54 /* Foundation.framework */; };
 		529400571A02884100F93C54 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529400391A02884000F93C54 /* UIKit.framework */; };
 		5294005F1A02884100F93C54 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5294005D1A02884100F93C54 /* InfoPlist.strings */; };
 		529400611A02884100F93C54 /* ChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 529400601A02884100F93C54 /* ChatAppTests.m */; };
+		849272DD1A05A6F4004D5CE4 /* RegisterUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849272DC1A05A6F4004D5CE4 /* RegisterUserViewController.m */; };
 		84EBCCAA1A02DE7500C97E72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */; };
 		84EBCCAC1A02DEBC00C97E72 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */; };
 		84EBCCAE1A02DEE400C97E72 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAD1A02DEE400C97E72 /* CoreLocation.framework */; };
@@ -56,14 +57,16 @@
 		529400441A02884000F93C54 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		529400451A02884000F93C54 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		529400481A02884000F93C54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5294004A1A02884000F93C54 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5294004B1A02884100F93C54 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5294004A1A02884000F93C54 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		5294004B1A02884100F93C54 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		5294004D1A02884100F93C54 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		529400531A02884100F93C54 /* ChatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		529400541A02884100F93C54 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5294005C1A02884100F93C54 /* ChatAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChatAppTests-Info.plist"; sourceTree = "<group>"; };
 		5294005E1A02884100F93C54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		529400601A02884100F93C54 /* ChatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAppTests.m; sourceTree = "<group>"; };
+		849272DB1A05A6F4004D5CE4 /* RegisterUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterUserViewController.h; sourceTree = "<group>"; };
+		849272DC1A05A6F4004D5CE4 /* RegisterUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterUserViewController.m; sourceTree = "<group>"; };
 		84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		84EBCCAD1A02DEE400C97E72 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -156,11 +159,12 @@
 		5294003B1A02884000F93C54 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				849272DA1A05A6CC004D5CE4 /* ViewControllers */,
 				529400441A02884000F93C54 /* AppDelegate.h */,
 				529400451A02884000F93C54 /* AppDelegate.m */,
 				529400471A02884000F93C54 /* Main.storyboard */,
-				5294004A1A02884000F93C54 /* ViewController.h */,
-				5294004B1A02884100F93C54 /* ViewController.m */,
+				5294004A1A02884000F93C54 /* MainViewController.h */,
+				5294004B1A02884100F93C54 /* MainViewController.m */,
 				5294004D1A02884100F93C54 /* Images.xcassets */,
 				5294003C1A02884000F93C54 /* Supporting Files */,
 			);
@@ -194,6 +198,15 @@
 				5294005D1A02884100F93C54 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		849272DA1A05A6CC004D5CE4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				849272DB1A05A6F4004D5CE4 /* RegisterUserViewController.h */,
+				849272DC1A05A6F4004D5CE4 /* RegisterUserViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,8 +306,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5294004C1A02884100F93C54 /* ViewController.m in Sources */,
+				5294004C1A02884100F93C54 /* MainViewController.m in Sources */,
 				529400461A02884000F93C54 /* AppDelegate.m in Sources */,
+				849272DD1A05A6F4004D5CE4 /* RegisterUserViewController.m in Sources */,
 				529400421A02884000F93C54 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,21 +6,22 @@
 //  Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainViewController.h"
 
-@interface ViewController ()
+@interface MainViewController ()
 
 @end
 
-@implementation ViewController
+@implementation MainViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    testObject[@"foo"] = @"bar";
-    [testObject saveInBackground];
+    
+    //PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+    //testObject[@"foo"] = @"bar";
+    //[testObject saveInBackground];
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,4 +30,6 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)logInTouchUp:(id)sender {
+}
 @end
