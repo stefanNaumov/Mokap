@@ -8,20 +8,18 @@
 
 #import "RegisterUserViewController.h"
 
-#define trimAll(object)[object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
-
 @interface RegisterUserViewController ()
-
 
 @end
 
-
 @implementation RegisterUserViewController{
     PFUser *user;
+    UserDataInputValidator *validator;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    validator = [[UserDataInputValidator alloc] init];
     // Do any additional setup after loading the view.
 }
 
@@ -41,15 +39,15 @@
     [self.passwordInput resignFirstResponder];
     [self.verifyPasswordInput resignFirstResponder];
     
-    if ([trimAll(username) length] == 0 || [trimAll(username) length] > 40) {
+    if (![validator validateUserName:username]) {
         alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username must be between 1 and 40 symbols" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];
     }
-    else if([trimAll(password) length] < 5 || [trimAll(password) length] > 30){
+    else if(![validator validatePassword:password]){
         alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Password must be between 5 and 30 symbols" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];
     }
-    else if(![password isEqualToString:verifiedPassword]){
+    else if(![validator verifyPassword:password withPassword:verifiedPassword]){
         alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Verified password is incorrect!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];
     }

@@ -22,6 +22,7 @@
 		5294005F1A02884100F93C54 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5294005D1A02884100F93C54 /* InfoPlist.strings */; };
 		529400611A02884100F93C54 /* ChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 529400601A02884100F93C54 /* ChatAppTests.m */; };
 		849272DD1A05A6F4004D5CE4 /* RegisterUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849272DC1A05A6F4004D5CE4 /* RegisterUserViewController.m */; };
+		849272E11A05B2A4004D5CE4 /* UserDataInputValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 849272E01A05B2A4004D5CE4 /* UserDataInputValidator.m */; };
 		84EBCCAA1A02DE7500C97E72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */; };
 		84EBCCAC1A02DEBC00C97E72 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */; };
 		84EBCCAE1A02DEE400C97E72 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAD1A02DEE400C97E72 /* CoreLocation.framework */; };
@@ -67,6 +68,8 @@
 		529400601A02884100F93C54 /* ChatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAppTests.m; sourceTree = "<group>"; };
 		849272DB1A05A6F4004D5CE4 /* RegisterUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterUserViewController.h; sourceTree = "<group>"; };
 		849272DC1A05A6F4004D5CE4 /* RegisterUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterUserViewController.m; sourceTree = "<group>"; };
+		849272DF1A05B2A4004D5CE4 /* UserDataInputValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataInputValidator.h; sourceTree = "<group>"; };
+		849272E01A05B2A4004D5CE4 /* UserDataInputValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataInputValidator.m; sourceTree = "<group>"; };
 		84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		84EBCCAD1A02DEE400C97E72 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -159,6 +162,7 @@
 		5294003B1A02884000F93C54 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				849272DE1A05B272004D5CE4 /* Validators */,
 				849272DA1A05A6CC004D5CE4 /* ViewControllers */,
 				529400441A02884000F93C54 /* AppDelegate.h */,
 				529400451A02884000F93C54 /* AppDelegate.m */,
@@ -207,6 +211,15 @@
 				849272DC1A05A6F4004D5CE4 /* RegisterUserViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		849272DE1A05B272004D5CE4 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				849272DF1A05B2A4004D5CE4 /* UserDataInputValidator.h */,
+				849272E01A05B2A4004D5CE4 /* UserDataInputValidator.m */,
+			);
+			name = Validators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +322,7 @@
 				5294004C1A02884100F93C54 /* MainViewController.m in Sources */,
 				529400461A02884000F93C54 /* AppDelegate.m in Sources */,
 				849272DD1A05A6F4004D5CE4 /* RegisterUserViewController.m in Sources */,
+				849272E11A05B2A4004D5CE4 /* UserDataInputValidator.m in Sources */,
 				529400421A02884000F93C54 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
