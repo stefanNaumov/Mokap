@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "UsersTableViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface MainViewController : UIViewController<UIAlertViewDelegate>
+@interface MainViewController : UIViewController<UIAlertViewDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userNameInput;
 @property (weak, nonatomic) IBOutlet UITextField *passwordInput;
 - (IBAction)logInTouchUp:(id)sender;

@@ -13,8 +13,9 @@
 @end
 
 @implementation MainViewController{
-    PFUser *user;
-    
+
+    CLLocationManager *locationManager;
+    CLLocation *userLocation;
 }
 
 static NSString *usersTableViewSegue = @"usersTableViewSegue";
@@ -23,11 +24,13 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
 {
     [super viewDidLoad];
     
-	// Do any additional setup after loading the view, typically from a nib.
+    locationManager = [[CLLocationManager alloc] init];
+    [locationManager requestWhenInUseAuthorization];
+    [locationManager requestAlwaysAuthorization];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
-    //PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-    //testObject[@"foo"] = @"bar";
-    //[testObject saveInBackground];
+    [locationManager startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,8 +39,9 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     // Dispose of any resources that can be recreated.
 }
 
+//action for logging the user and setting user's coordinates from current user position
 - (IBAction)logInTouchUp:(id)sender {
-    user = [PFUser user];
+
     NSString *username = self.userNameInput.text;
     NSString *password = self.passwordInput.text;
     
@@ -45,14 +49,19 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     [self.userNameInput resignFirstResponder];
     [self.passwordInput resignFirstResponder];
     
+    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLocation:userLocation];
+    
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         UIAlertView *loginAlertView;
         if (!error) {
+            user[@"location"] = geoPoint;
+            [user saveEventually];
+            
             loginAlertView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Logged in!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [loginAlertView show];
         }
         else{
-            loginAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Login failed!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            loginAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username or password incorrect!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [loginAlertView show];
         }
     }];
@@ -62,6 +71,7 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     self.passwordInput.text = @"";
 }
 
+//respond UIAlert view cancel button click by triggerring the usersTableViewSegue
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
         
@@ -71,9 +81,9 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    
     if ([segue.identifier isEqualToString:usersTableViewSegue]) {
         PFQuery *query = [PFUser query];
+        
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 UsersTableViewController *controller = [segue destinationViewController];
@@ -87,7 +97,17 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
             
         }];
     }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+    CLLocation *lastLocation = [locations lastObject];
+    
+    userLocation = lastLocation;
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
