@@ -83,6 +83,9 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     
     if ([segue.identifier isEqualToString:usersTableViewSegue]) {
         PFQuery *query = [PFUser query];
+        PFUser *currentUser = [PFUser currentUser];
+        
+        [query whereKey:@"username" notEqualTo:[currentUser username]];
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
