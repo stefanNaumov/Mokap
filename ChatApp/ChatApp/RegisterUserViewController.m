@@ -12,6 +12,8 @@
 
 @end
 
+static NSString *usersTableViewSegue = @"usersTableViewSegue";
+
 @implementation RegisterUserViewController{
     PFUser *user;
     UserDataInputValidator *validator;
@@ -40,7 +42,7 @@
     [self.verifyPasswordInput resignFirstResponder];
     
     if (![validator validateUserName:username]) {
-        alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username must be between 1 and 40 symbols" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username must be between 1 and 40 symbols" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alertView show];
     }
     else if(![validator validatePassword:password]){
@@ -60,7 +62,7 @@
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             UIAlertView *registerAlertView;
             if (!error) {
-                registerAlertView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Registration succesfull!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                registerAlertView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Registration succesfull!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                 
                 [registerAlertView show];
             }
@@ -76,6 +78,31 @@
         self.verifyPasswordInput.text = @"";
         
         
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        [self performSegueWithIdentifier:usersTableViewSegue sender:self];
+    }
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:usersTableViewSegue]) {
+        PFQuery *query = [PFUser query];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                UsersTableViewController *controller = [segue destinationViewController];
+                [controller setUsers:objects];
+                [controller.tableView reloadData];
+            }
+            else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not connect to server!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                [alert show];
+            }
+            
+        }];
     }
 }
 

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "UserDataInputValidator.h"
+#import "UsersTableViewController.h"
 
-@interface RegisterUserViewController : UIViewController
+@interface RegisterUserViewController : UIViewController<UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameInput;
 
