@@ -155,10 +155,10 @@
             </objects>
             <point key="canvasLocation" x="-15" y="-192"/>
         </scene>
-        <!--Users Table View Controller-->
+        <!--Chat People List-->
         <scene sceneID="Rk5-1s-knX">
             <objects>
-                <tableViewController id="KvM-gu-W5Q" customClass="UsersTableViewController" sceneMemberID="viewController">
+                <tableViewController title="Chat People List" id="KvM-gu-W5Q" customClass="UsersTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="EaY-7p-Rgu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
