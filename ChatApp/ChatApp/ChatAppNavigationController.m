@@ -21,11 +21,25 @@
     self = [super init];
     if (self) {
         locationManager = [[CLLocationManager alloc] init];
-        [locationManager requestWhenInUseAuthorization];
-        [locationManager requestAlwaysAuthorization];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+        // Being compiled with a Base SDK of iOS 8 or later
+        // Now do a runtime check to be sure the method is supported
+        if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+            [self.locationManager requestAlwaysAuthorization];
+        } else {
+            // No such method on this device - do something else as needed
+        }
+        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self.locationManager requestWhenInUseAuthorization];
+        } else {
+            // No such method on this device - do something else as needed
+        }
+#else
+        // Being compiled with a Base SDK of iOS 7.x or earlier
+        // No such method - do something else as needed
+#endif
         locationManager.delegate = self;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        
         [locationManager startUpdatingLocation];
     }
     
