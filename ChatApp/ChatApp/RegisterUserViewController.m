@@ -82,9 +82,10 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 0) {
-        [self performSegueWithIdentifier:usersTableViewSegue sender:self];
-    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //if (buttonIndex == 0) {
+        //[self performSegueWithIdentifier:usersTableViewSegue sender:self];
+    //}
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

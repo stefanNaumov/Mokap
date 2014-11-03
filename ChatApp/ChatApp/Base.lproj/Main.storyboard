@@ -149,7 +149,6 @@
                         <outlet property="passwordInput" destination="6J9-zF-qbp" id="eEr-xX-OVL"/>
                         <outlet property="userNameInput" destination="ZUW-Gc-a5c" id="REe-5v-PWG"/>
                         <outlet property="verifyPasswordInput" destination="Ktl-2b-q0d" id="TTa-OU-ZJf"/>
-                        <segue destination="KvM-gu-W5Q" kind="modal" identifier="usersTableViewSegue" id="jKy-q4-Ywy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hky-Of-HF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -180,7 +179,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rab-ld-6m8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-201" y="498"/>
+            <point key="canvasLocation" x="-270" y="601"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -188,7 +187,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="jKy-q4-Ywy"/>
-    </inferredMetricsTieBreakers>
 </document>
