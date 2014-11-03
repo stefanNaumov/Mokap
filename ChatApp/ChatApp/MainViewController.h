@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "UsersTableViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "ChatAppNavigationController.h"
 
 @interface MainViewController : UIViewController<UIAlertViewDelegate,CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userNameInput;

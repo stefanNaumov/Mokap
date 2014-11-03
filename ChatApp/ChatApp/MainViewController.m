@@ -14,7 +14,7 @@
 
 @implementation MainViewController{
 
-    CLLocationManager *locationManager;
+    ChatAppNavigationController *navController;
     CLLocation *userLocation;
 }
 
@@ -24,13 +24,7 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
 {
     [super viewDidLoad];
     
-    locationManager = [[CLLocationManager alloc] init];
-    [locationManager requestWhenInUseAuthorization];
-    [locationManager requestAlwaysAuthorization];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    
-    [locationManager startUpdatingLocation];
+    navController = [ChatAppNavigationController sharedSingleton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,7 +35,9 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
 
 //action for logging the user and setting user's coordinates from current user position
 - (IBAction)logInTouchUp:(id)sender {
-
+    
+     userLocation = navController.locationManager.location;
+    
     NSString *username = self.userNameInput.text;
     NSString *password = self.passwordInput.text;
     
@@ -49,12 +45,14 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     [self.userNameInput resignFirstResponder];
     [self.passwordInput resignFirstResponder];
     
+    //[navController]
     PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLocation:userLocation];
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         UIAlertView *loginAlertView;
         if (!error) {
             user[@"location"] = geoPoint;
+            //NSLog(@"%@",geoPoint);
             [user saveEventually];
             
             loginAlertView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Logged in!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -100,17 +98,6 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
             
         }];
     }
-}
-
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-    
-}
-
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    
-    CLLocation *lastLocation = [locations lastObject];
-    
-    userLocation = lastLocation;
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
