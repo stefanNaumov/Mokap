@@ -12,11 +12,14 @@
 
 @end
 
-@implementation UsersTableViewController
+@implementation UsersTableViewController{
+    PFUser *loggedUser;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    loggedUser = [PFUser currentUser];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -41,7 +44,6 @@
 
     // Return the number of rows in the section.
     return [self.users count];
-    //return [self.users count];
 }
 
 
@@ -49,10 +51,25 @@
     static NSString *identifier = @"UserCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     
-    PFObject *currUser = [self.users objectAtIndex:indexPath.row];
-    cell.textLabel.text = [currUser objectForKey:@"username"];
+    PFObject *user = [self.users objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [user objectForKey:@"username"];
 
     return cell;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    //add checking for particular segue
+    
+    NSIndexPath *pathForOtherUser = [self.tableView indexPathForSelectedRow];
+    
+    PFUser *otherUser = [self.users objectAtIndex:pathForOtherUser.row];
+    
+    ChatSessionViewController *controller = [segue destinationViewController];
+    [controller setLoggedUser:loggedUser];
+    [controller setOtherUser:otherUser];
+
 }
 
 
