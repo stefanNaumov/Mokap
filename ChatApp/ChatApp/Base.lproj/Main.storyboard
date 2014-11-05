@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Log In-->
+        <!--Main View Controller - Log In-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController title="Log In" id="vXZ-lx-hvc" customClass="MainViewController" sceneMemberID="viewController">
@@ -26,7 +25,10 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dv9-fA-LdN">
                                 <rect key="frame" x="16" y="196" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="r7R-30-6kY"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Don't have an account yet?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N99-uc-pOF">
                                 <rect key="frame" x="16" y="381" width="288" height="50"/>
@@ -48,7 +50,10 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9hh-Kv-ACE">
                                 <rect key="frame" x="16" y="107" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="1Ih-o2-I6O"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12u-ar-ijx">
                                 <rect key="frame" x="183" y="254" width="121" height="52"/>
@@ -82,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="-457" y="-192"/>
         </scene>
-        <!--Sign Up-->
+        <!--Register User View Controller - Sign Up-->
         <scene sceneID="5wY-oa-wdc">
             <objects>
                 <viewController title="Sign Up" id="Y38-CK-rVe" customClass="RegisterUserViewController" sceneMemberID="viewController">
@@ -121,12 +126,18 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZUW-Gc-a5c">
                                 <rect key="frame" x="16" y="161" width="282" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Y38-CK-rVe" id="grc-eX-VWR"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6J9-zF-qbp">
                                 <rect key="frame" x="16" y="269" width="282" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Y38-CK-rVe" id="0Lp-yJ-yJV"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgN-BJ-Pqb">
                                 <rect key="frame" x="180" y="462" width="124" height="48"/>
@@ -142,7 +153,10 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ktl-2b-q0d">
                                 <rect key="frame" x="16" y="375" width="282" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Y38-CK-rVe" id="FtK-lI-Kgo"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.90228006114130432" green="0.84522264265915426" blue="0.67886896546462516" alpha="1" colorSpace="calibratedRGB"/>
@@ -158,7 +172,7 @@
             </objects>
             <point key="canvasLocation" x="-15" y="-192"/>
         </scene>
-        <!--Chat People List-->
+        <!--Users Table View Controller - Chat People List-->
         <scene sceneID="Rk5-1s-knX">
             <objects>
                 <tableViewController title="Chat People List" id="KvM-gu-W5Q" customClass="UsersTableViewController" sceneMemberID="viewController">
@@ -189,7 +203,7 @@
             </objects>
             <point key="canvasLocation" x="-500" y="569"/>
         </scene>
-        <!--Chat Session-->
+        <!--Chat Session View Controller - Chat Session-->
         <scene sceneID="mWw-Y7-w40">
             <objects>
                 <viewController title="Chat Session" id="KAU-wo-HaM" customClass="ChatSessionViewController" sceneMemberID="viewController">
@@ -206,8 +220,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageCell" id="Fs8-Kq-TBh">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fs8-Kq-TBh" id="tGK-Bw-ijG">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
