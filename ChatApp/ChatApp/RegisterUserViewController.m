@@ -22,6 +22,8 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
 - (void)viewDidLoad {
     [super viewDidLoad];
     validator = [[UserDataInputValidator alloc] init];
+    
+    [self setButtonStyles];
     // Do any additional setup after loading the view.
 }
 
@@ -107,6 +109,12 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     }
 }
 
+-(void) setButtonStyles{
+    
+    self.registerBtn.layer.borderWidth = 0.8f;
+    self.registerBtn.layer.cornerRadius = 35.0f;
+    self.registerBtn.layer.backgroundColor = [UIColor colorWithRed:190.0/255.0 green:150.0/255.0 blue:117/255.0 alpha:0.3].CGColor;
+}
 //hide keyboard when user clicks somewhere on the screen
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:TRUE];

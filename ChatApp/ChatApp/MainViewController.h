@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *userNameInput;
 @property (weak, nonatomic) IBOutlet UITextField *passwordInput;
 - (IBAction)logInTouchUp:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *signInButton;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 
 @end

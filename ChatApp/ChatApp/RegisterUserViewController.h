@@ -12,6 +12,7 @@
 #import "UsersTableViewController.h"
 
 @interface RegisterUserViewController : UIViewController<UIAlertViewDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *registerBtn;
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameInput;
 

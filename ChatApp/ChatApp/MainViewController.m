@@ -25,6 +25,9 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     [super viewDidLoad];
     
     navController = [ChatAppNavigationController sharedSingleton];
+    
+    [self setButtonStyles];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,6 +101,17 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
             
         }];
     }
+}
+
+-(void) setButtonStyles{
+    
+    self.signInButton.layer.borderWidth = 0.8f;
+    self.signInButton.layer.cornerRadius = 35.0f;
+    self.signInButton.layer.backgroundColor = [UIColor colorWithRed:190.0/255.0 green:150.0/255.0 blue:117/255.0 alpha:0.3].CGColor;
+    
+    self.signUpButton.layer.borderWidth = 0.8f;
+    self.signUpButton.layer.cornerRadius = 35.0f;
+    self.signUpButton.layer.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:153.0/255.0 blue:51/255.0 alpha:0.3].CGColor;
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
