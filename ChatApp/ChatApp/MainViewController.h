@@ -13,6 +13,7 @@
 #import "ChatAppNavigationController.h"
 
 @interface MainViewController : UIViewController<UIAlertViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *userNameInput;
 @property (weak, nonatomic) IBOutlet UITextField *passwordInput;
 - (IBAction)logInTouchUp:(id)sender;

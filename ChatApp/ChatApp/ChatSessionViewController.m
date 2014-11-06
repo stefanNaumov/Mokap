@@ -11,15 +11,33 @@
 @interface ChatSessionViewController (){
     NSMutableArray *testData;
     MessageBalloonUITableViewCell *_stubCell;
+    NSDate *dateBeforeNewMessages;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *messageToSend;
 
 @end
 
 static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
 
 @implementation ChatSessionViewController
+
+- (IBAction)sendMessage:(id)sender {
+    // FIXME: validate if empty -> return or disable button
+    // TODO: trim message before send
+    NSString *textToSend = self.messageToSend.text;
+    PFObject *pfMessage = [PFObject objectWithClassName:@"Message"];
+    pfMessage[@"TextMessage"] = textToSend;
+    // FIXME: Merge Author and User1 Maybe?
+    pfMessage[@"Author"] = self.loggedUser.username;
+    pfMessage[@"User1"] = self.loggedUser.username;
+    pfMessage[@"User2"] = self.otherUser.username;
+    [pfMessage saveInBackground];
+    
+    [self.messageToSend setText:@""];
+    [self.messageToSend resignFirstResponder];
+}
 
 //  FIXME: Test Method
 // Pass the downloaded array with objects and refresh
@@ -30,10 +48,12 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
         [testData addObject: [NSString stringWithFormat:@"I Got Resized %@", testData[testData.count - 1]]];
     }
     
+    int count = testData.count-1;
+    
     // Insert new Row
-    [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:testData.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
+        [self.tableView beginUpdates];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject: [NSIndexPath indexPathForRow:count inSection:0]]  withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
     
     // Scroll down after inserting new Row
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:testData.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -41,22 +61,33 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    dateBeforeNewMessages = [[NSDate alloc] init];
     // Do any additional setup after loading the view.
     testData = [[NSMutableArray alloc] init];
-    [testData addObject:@"initial "];
     
     // Register Nib Cell
     UINib *cellNib = [UINib nibWithNibName:CellIdentifier bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:CellIdentifier];
     _stubCell = [cellNib instantiateWithOwner:nil options:nil][0];
     
-    NSLog(@"LoggedUser %@",[self.loggedUser username]);
-    NSLog(@"OtherUser %@",[self.otherUser username]);
+    [self loadLatestMessageHistory];
+    
+    // Refresh messages every 1 sec.
+    [self refreshMessagesEvery:1.0];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)refreshForNewMessages{
+    // Limit messages to 1337. Dunno how to say: do not limit
+    [self getMessagesAfter:dateBeforeNewMessages AndLimitTo:1337];
+}
+
+-(void)refreshMessagesEvery: (double) second{
+    [NSTimer scheduledTimerWithTimeInterval:second target:self selector:@selector(refreshForNewMessages) userInfo:nil repeats:YES];
 }
 
 #pragma mark - Table view data source
@@ -97,6 +128,21 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
     cell.messageText.text = testData[indexPath.row % testData.count];
 }
 
+- (void)addLastCells:(int)count {
+    
+    // Insert New Rows
+    [self.tableView beginUpdates];
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    for (int i = 0; i < count; i++) {
+        [arr addObject:[NSIndexPath indexPathForRow: testData.count - count + i inSection:0]];
+    }
+    [self.tableView insertRowsAtIndexPaths: arr withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
+    
+    // Scroll down after inserting new Rows
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:testData.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
 /*
 - (void)tableView:(UITableView *)tableView willDisplayCell:(MessageBalloonUITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"willdeplaycell");
@@ -112,5 +158,72 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:TRUE];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)loadLatestMessageHistory {
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    //[cal setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    //[cal setLocale:[NSLocale currentLocale]];
+    NSDateComponents *oct31th1989 = [[NSDateComponents alloc] init];
+    [oct31th1989 setYear:1989];
+    [oct31th1989 setMonth:10];
+    [oct31th1989 setDay:31];
+    [oct31th1989 setHour:13];
+    [oct31th1989 setMinute:33];
+    [oct31th1989 setSecond:37];
+    NSDate *birthDay = [cal dateFromComponents:oct31th1989];
+    // Get all (just 6) messages after my birthday. Dunno how to say: Any date.
+    [self getMessagesAfter:birthDay AndLimitTo:6];
+
+}
+
+- (void)getMessagesAfter:(NSDate *)Date AndLimitTo:(int)limit {
+    NSString *user1 =self.loggedUser.username;
+    NSString *user2 =self.otherUser.username;
+    NSString *format = [NSString stringWithFormat:@"(User1 = '%@' OR User1 = '%@') AND (User2 = '%@' OR User2 = '%@')",user1,user2,user1,user2];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:format];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Message" predicate:predicate];
+    [query orderByDescending:@"createdAt"];
+    [query whereKey:@"createdAt" greaterThan:Date];
+    // TODO: Sort Messages proper. Check them out!!!
+    query.limit = limit;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d scores.", objects.count);
+            
+            NSMutableArray *newMessages = [[NSMutableArray alloc] init];
+            // Do something with the found objects
+            NSMutableArray *dates = [[NSMutableArray alloc] init];
+            for (PFObject *object in objects) {
+                // TODO: Add all object instead of just text.
+                // Then in cellForRowAtIndexPath can use it as testData[indexPath.row].TextMessage
+                // Maybe Make Model?
+                [newMessages addObject:object[@"TextMessage"]];
+                [dates addObject:object.createdAt];
+            }
+            NSLog(@" 1-------WTF------ %@", dateBeforeNewMessages);
+            if ([dates objectAtIndex:0]) {
+                NSLog(@" -------IN------ ");
+                dateBeforeNewMessages = [dates objectAtIndex:0];
+            }
+            NSLog(@" does NOT get print 2-------WTF------ %@", dateBeforeNewMessages);
+            [testData addObjectsFromArray:[[newMessages reverseObjectEnumerator] allObjects]];
+            [self addLastCells:newMessages.count];
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
 
 @end
