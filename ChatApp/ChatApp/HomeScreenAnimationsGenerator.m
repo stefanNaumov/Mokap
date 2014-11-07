@@ -8,8 +8,7 @@
 
 #import "HomeScreenAnimationsGenerator.h"
 
-static const int RECT_SIZE = 45.0;
-static const int CAPITALS_HEIGHT = 60;
+static const int RECT_SIZE = 45;
 
 @implementation HomeScreenAnimationsGenerator{
     UIDynamicAnimator *_animator;
@@ -22,10 +21,6 @@ static const int CAPITALS_HEIGHT = 60;
     UILabel *pAppLabel;
     UILabel *secPappLabel;
     
-    UIColor *orangeColor;
-    UIColor *lightGreenColor;
-    UIColor *brownred;
-    
 }
 
 -(id) initWithViewController:(UIViewController *)controller{
@@ -33,22 +28,18 @@ static const int CAPITALS_HEIGHT = 60;
     if (self) {
         _controller = controller;
         
-        orangeColor = [UIColor colorWithRed:240.0/255 green:180.0/255 blue:70.0/255 alpha:1.0];
-        lightGreenColor = [UIColor colorWithRed:150.0/255 green:182.0/255 blue:90.0/255 alpha:1.0];
-        brownred = [UIColor colorWithRed:200.0/255 green:160.0/255 blue:110.0/255 alpha:1.0];
-        
         //default start width value
         CGFloat size = 10;
         
-        cChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size, 0, RECT_SIZE, CAPITALS_HEIGHT)];
-        [cChatLabel setBackgroundColor:brownred];
+        cChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size, 0, RECT_SIZE, RECT_SIZE)];
+        [cChatLabel setBackgroundColor:[UIColor blueColor]];
         [cChatLabel setText:@"C"];
         [self setFontProperties:cChatLabel];
         
         [_controller.view addSubview:cChatLabel];
         
         hChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
-        [hChatLabel setBackgroundColor:lightGreenColor];
+        [hChatLabel setBackgroundColor:[UIColor orangeColor]];
         [hChatLabel setText:@"h"];
         [self setFontProperties:hChatLabel];
         
@@ -57,7 +48,7 @@ static const int CAPITALS_HEIGHT = 60;
         size = size + RECT_SIZE;
         
         aChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
-        [aChatLabel setBackgroundColor:orangeColor];
+        [aChatLabel setBackgroundColor:[UIColor greenColor]];
         [aChatLabel setText:@"a"];
         [self setFontProperties:aChatLabel];
         
@@ -66,7 +57,7 @@ static const int CAPITALS_HEIGHT = 60;
         size = size + RECT_SIZE;
         
         tChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
-        [tChatLabel setBackgroundColor:lightGreenColor];
+        [tChatLabel setBackgroundColor:[UIColor redColor]];
         [tChatLabel setText:@"t"];
         [self setFontProperties:tChatLabel];
         
@@ -74,9 +65,8 @@ static const int CAPITALS_HEIGHT = 60;
         
         size = size + RECT_SIZE;
         
-        aAppLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE,
-                                                              CAPITALS_HEIGHT)];
-        [aAppLabel setBackgroundColor:brownred];
+        aAppLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
+        [aAppLabel setBackgroundColor:[UIColor yellowColor]];
         [aAppLabel setText:@"A"];
         [self setFontProperties:aAppLabel];
         
@@ -85,7 +75,7 @@ static const int CAPITALS_HEIGHT = 60;
         size = size + RECT_SIZE;
         
         pAppLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
-        [pAppLabel setBackgroundColor:lightGreenColor];
+        [pAppLabel setBackgroundColor:[UIColor grayColor]];
         [pAppLabel setText:@"p"];
         [self setFontProperties:pAppLabel];
         
@@ -94,7 +84,7 @@ static const int CAPITALS_HEIGHT = 60;
         size = size + RECT_SIZE;
         
         secPappLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
-        [secPappLabel setBackgroundColor:orangeColor];
+        [secPappLabel setBackgroundColor:[UIColor purpleColor]];
         [secPappLabel setText:@"p"];
         [self setFontProperties:secPappLabel];
         
@@ -112,18 +102,18 @@ static const int CAPITALS_HEIGHT = 60;
     [collision setTranslatesReferenceBoundsIntoBoundary:YES];
     [_animator addBehavior:collision];
     
+    //first elements half
     UIGravityBehavior *firstHalfGravity = [[UIGravityBehavior alloc] initWithItems:@[cChatLabel,aChatLabel,aAppLabel,secPappLabel]];
-    [firstHalfGravity setMagnitude:[self generateRandom:2.5 and:3.0]];
+    [firstHalfGravity setMagnitude:[self generateRandom:3.0 and:4.5]];
     [_animator addBehavior:firstHalfGravity];
     
-    //first elements half
     UIDynamicItemBehavior *firstHalfDynamic = [[UIDynamicItemBehavior alloc] initWithItems:@[cChatLabel,aChatLabel,aAppLabel,secPappLabel]];
     [firstHalfDynamic setElasticity:[self generateRandom:0.5 and:0.8]];
     [_animator addBehavior:firstHalfDynamic];
     
     //second elements half
     UIGravityBehavior *secondHalfGravity = [[UIGravityBehavior alloc] initWithItems:@[hChatLabel,tChatLabel,pAppLabel]];
-    [secondHalfGravity setMagnitude:[self generateRandom:0.5 and:2.0]];
+    [secondHalfGravity setMagnitude:[self generateRandom:2.8 and:3.5]];
     [_animator addBehavior:secondHalfGravity];
     
     UIDynamicItemBehavior *secondHalfDynamic = [[UIDynamicItemBehavior alloc] initWithItems:@[hChatLabel,tChatLabel,pAppLabel]];
@@ -135,7 +125,7 @@ static const int CAPITALS_HEIGHT = 60;
 -(void) setFontProperties:(UILabel *)label{
     
     [label setTextAlignment:NSTextAlignmentCenter];
-    [label setFont:[UIFont fontWithName:@"Trebuchet MS" size:30]];
+    [label setFont:[UIFont fontWithName:@"Trebuchet MS" size:25]];
 }
 
 -(float) generateRandom:(float) lower and: (float)upper{

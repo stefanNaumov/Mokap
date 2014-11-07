@@ -7,7 +7,7 @@
 //
 
 #import "ChatSessionViewController.h"
-
+// TODO: Add refresh location on every ... for loggedUser
 @interface ChatSessionViewController (){
     NSMutableArray *testData;
     MessageBalloonUITableViewCell *_stubCell;
@@ -40,7 +40,6 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
 }
 
 //  FIXME: Test Method
-// Pass the downloaded array with objects and refresh
 - (IBAction)addRowTest:(id)sender {
     if (testData.count > 18) {
             [testData addObject: [NSString stringWithFormat:@"Check Resizing. Oh Yeah! %d", testData.count]];
@@ -68,11 +67,13 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
     // Register Nib Cell
     UINib *cellNib = [UINib nibWithNibName:CellIdentifier bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:CellIdentifier];
+    
+    // _subCell so we can autoresize cell
     _stubCell = [cellNib instantiateWithOwner:nil options:nil][0];
     
     [self loadLatestMessageHistory];
     
-    // Refresh messages every 1 sec.
+    // Refresh messages every 1.0 sec.
     [self refreshMessagesEvery:1.0];
 }
 
@@ -149,16 +150,6 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
 }
 */
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:TRUE];
 }
@@ -225,5 +216,15 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
         }
     }];
 }
+
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+     ShowLocationViewController *slvc = [segue destinationViewController];
+ // Pass the selected object to the new view controller.
+     slvc.otherUser = self.otherUser;
+ }
 
 @end
