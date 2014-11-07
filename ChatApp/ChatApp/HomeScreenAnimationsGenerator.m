@@ -31,15 +31,28 @@ static const int RECT_SIZE = 45;
         //default start width value
         CGFloat size = 10;
         
+<<<<<<< HEAD
         cChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size, 0, RECT_SIZE, RECT_SIZE)];
         [cChatLabel setBackgroundColor:[UIColor blueColor]];
+=======
+        cChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size, 0, RECT_SIZE, CAPITALS_HEIGHT)];
+        [self setConstraints:cChatLabel];
+        
+        [cChatLabel setBackgroundColor:brownred];
+>>>>>>> FETCH_HEAD
         [cChatLabel setText:@"C"];
         [self setFontProperties:cChatLabel];
         
         [_controller.view addSubview:cChatLabel];
         
         hChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
+<<<<<<< HEAD
         [hChatLabel setBackgroundColor:[UIColor orangeColor]];
+=======
+        [self setConstraints:hChatLabel];
+        
+        [hChatLabel setBackgroundColor:lightGreenColor];
+>>>>>>> FETCH_HEAD
         [hChatLabel setText:@"h"];
         [self setFontProperties:hChatLabel];
         
@@ -48,7 +61,13 @@ static const int RECT_SIZE = 45;
         size = size + RECT_SIZE;
         
         aChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
+<<<<<<< HEAD
         [aChatLabel setBackgroundColor:[UIColor greenColor]];
+=======
+        [self setConstraints:aChatLabel];
+        
+        [aChatLabel setBackgroundColor:orangeColor];
+>>>>>>> FETCH_HEAD
         [aChatLabel setText:@"a"];
         [self setFontProperties:aChatLabel];
         
@@ -57,7 +76,13 @@ static const int RECT_SIZE = 45;
         size = size + RECT_SIZE;
         
         tChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
+<<<<<<< HEAD
         [tChatLabel setBackgroundColor:[UIColor redColor]];
+=======
+        [self setConstraints:tChatLabel];
+        
+        [tChatLabel setBackgroundColor:lightGreenColor];
+>>>>>>> FETCH_HEAD
         [tChatLabel setText:@"t"];
         [self setFontProperties:tChatLabel];
         
@@ -65,8 +90,16 @@ static const int RECT_SIZE = 45;
         
         size = size + RECT_SIZE;
         
+<<<<<<< HEAD
         aAppLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
         [aAppLabel setBackgroundColor:[UIColor yellowColor]];
+=======
+        aAppLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE,
+                                                              CAPITALS_HEIGHT)];
+        [self setConstraints:aChatLabel];
+        
+        [aAppLabel setBackgroundColor:brownred];
+>>>>>>> FETCH_HEAD
         [aAppLabel setText:@"A"];
         [self setFontProperties:aAppLabel];
         
@@ -75,7 +108,13 @@ static const int RECT_SIZE = 45;
         size = size + RECT_SIZE;
         
         pAppLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
+<<<<<<< HEAD
         [pAppLabel setBackgroundColor:[UIColor grayColor]];
+=======
+        [self setConstraints:pAppLabel];
+        
+        [pAppLabel setBackgroundColor:lightGreenColor];
+>>>>>>> FETCH_HEAD
         [pAppLabel setText:@"p"];
         [self setFontProperties:pAppLabel];
         
@@ -84,14 +123,26 @@ static const int RECT_SIZE = 45;
         size = size + RECT_SIZE;
         
         secPappLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
+<<<<<<< HEAD
         [secPappLabel setBackgroundColor:[UIColor purpleColor]];
+=======
+        [self setConstraints:secPappLabel];
+        
+        [secPappLabel setBackgroundColor:orangeColor];
+>>>>>>> FETCH_HEAD
         [secPappLabel setText:@"p"];
         [self setFontProperties:secPappLabel];
         
         [controller.view addSubview:secPappLabel];
+        
     }
     
     return self;
+}
+
+-(void) setConstraints:(UILabel *) view{
+    
+    view.translatesAutoresizingMaskIntoConstraints = YES;
 }
 
 -(void) generateAnimations{
