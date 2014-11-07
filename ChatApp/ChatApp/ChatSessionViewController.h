@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "MessageBalloonUITableViewCell.h"
-#import "ShowLocationViewController.h"
 
 @interface ChatSessionViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
