@@ -40,9 +40,6 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     // Dispose of any resources that can be recreated.
 }
 
--(void) updateViewConstraints{
-    [super updateViewConstraints];
-}
 //action for logging the user and setting user's coordinates from current user position
 - (IBAction)logInTouchUp:(id)sender {
     
