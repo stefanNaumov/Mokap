@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Log In-->
+        <!--Main View Controller - Log In-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController title="Log In" id="vXZ-lx-hvc" customClass="MainViewController" sceneMemberID="viewController">
@@ -37,6 +36,17 @@
                                 <color key="textColor" red="0.28347911005434778" green="0.28347911005434778" blue="0.28347911005434778" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZa-n1-eqB">
+                                <rect key="frame" x="183" y="445" width="121" height="51"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" red="0.75562584919999998" green="0.39593502190000002" blue="0.06059390185" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Y38-CK-rVe" kind="modal" identifier="signUpSegue" modalTransitionStyle="crossDissolve" id="64H-ZL-cuG"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="asdasd" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9hh-Kv-ACE">
                                 <rect key="frame" x="16" y="107" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -62,17 +72,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZa-n1-eqB">
-                                <rect key="frame" x="183" y="439" width="121" height="51"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Sign Up">
-                                    <color key="titleColor" red="0.75562584919999998" green="0.39593502190000002" blue="0.06059390185" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Y38-CK-rVe" kind="modal" identifier="signUpSegue" modalTransitionStyle="crossDissolve" id="64H-ZL-cuG"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.75566830842391308" green="0.73756458384999357" blue="0.4846877898394738" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -88,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="-457" y="-192"/>
         </scene>
-        <!--Sign Up-->
+        <!--Register User View Controller - Sign Up-->
         <scene sceneID="5wY-oa-wdc">
             <objects>
                 <viewController title="Sign Up" id="Y38-CK-rVe" customClass="RegisterUserViewController" sceneMemberID="viewController">
@@ -173,7 +172,7 @@
             </objects>
             <point key="canvasLocation" x="-15" y="-192"/>
         </scene>
-        <!--Chat People List-->
+        <!--Users Table View Controller - Chat People List-->
         <scene sceneID="Rk5-1s-knX">
             <objects>
                 <tableViewController title="Chat People List" id="KvM-gu-W5Q" customClass="UsersTableViewController" sceneMemberID="viewController">
@@ -204,7 +203,7 @@
             </objects>
             <point key="canvasLocation" x="-500" y="569"/>
         </scene>
-        <!--Chat Session-->
+        <!--Chat Session View Controller - Chat Session-->
         <scene sceneID="mWw-Y7-w40">
             <objects>
                 <viewController title="Chat Session" id="KAU-wo-HaM" customClass="ChatSessionViewController" sceneMemberID="viewController">
@@ -253,6 +252,16 @@
                                     <action selector="sendMessage:" destination="KAU-wo-HaM" eventType="touchUpInside" id="Mlj-zJ-qX9"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ck5-Pl-Fez">
+                                <rect key="frame" x="210" y="486" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="G">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="MP5-zp-Hv9" kind="modal" id="32i-36-rTJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -264,6 +273,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4oU-VG-DMZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-15" y="569"/>
+        </scene>
+        <!--Show Location View Controller-->
+        <scene sceneID="cg9-ga-V0z">
+            <objects>
+                <viewController id="MP5-zp-Hv9" customClass="ShowLocationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bbc-ub-7t1"/>
+                        <viewControllerLayoutGuide type="bottom" id="Me6-lR-D0Z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pfZ-9t-qau">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q3A-Yp-dQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="378" y="569"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

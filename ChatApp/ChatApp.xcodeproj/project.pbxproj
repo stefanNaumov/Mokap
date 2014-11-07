@@ -21,6 +21,7 @@
 		529400571A02884100F93C54 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529400391A02884000F93C54 /* UIKit.framework */; };
 		5294005F1A02884100F93C54 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5294005D1A02884100F93C54 /* InfoPlist.strings */; };
 		529400611A02884100F93C54 /* ChatAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 529400601A02884100F93C54 /* ChatAppTests.m */; };
+		52B9096F1A0D006400A17D8C /* ShowLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B9096E1A0D006400A17D8C /* ShowLocationViewController.m */; };
 		52D376C61A0ACD0A000DF7EF /* MessageBalloonUITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D376C51A0ACD0A000DF7EF /* MessageBalloonUITableViewCell.m */; };
 		52D376C81A0ACDC9000DF7EF /* MessageBalloonUITableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52D376C71A0ACDC9000DF7EF /* MessageBalloonUITableViewCell.xib */; };
 		848FB9111A07AED00014EDBC /* ChatAppNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 848FB9101A07AED00014EDBC /* ChatAppNavigationController.m */; };
@@ -72,6 +73,8 @@
 		5294005C1A02884100F93C54 /* ChatAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChatAppTests-Info.plist"; sourceTree = "<group>"; };
 		5294005E1A02884100F93C54 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		529400601A02884100F93C54 /* ChatAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAppTests.m; sourceTree = "<group>"; };
+		52B9096D1A0D006400A17D8C /* ShowLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowLocationViewController.h; sourceTree = "<group>"; };
+		52B9096E1A0D006400A17D8C /* ShowLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowLocationViewController.m; sourceTree = "<group>"; };
 		52D376C41A0ACD0A000DF7EF /* MessageBalloonUITableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageBalloonUITableViewCell.h; sourceTree = "<group>"; };
 		52D376C51A0ACD0A000DF7EF /* MessageBalloonUITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageBalloonUITableViewCell.m; sourceTree = "<group>"; };
 		52D376C71A0ACDC9000DF7EF /* MessageBalloonUITableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageBalloonUITableViewCell.xib; sourceTree = "<group>"; };
@@ -253,6 +256,8 @@
 				8491885D1A06933F0057C1C3 /* UsersTableViewController.m */,
 				84928DE01A09153200168208 /* ChatSessionViewController.h */,
 				84928DE11A09153200168208 /* ChatSessionViewController.m */,
+				52B9096D1A0D006400A17D8C /* ShowLocationViewController.h */,
+				52B9096E1A0D006400A17D8C /* ShowLocationViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -369,6 +374,7 @@
 				5294004C1A02884100F93C54 /* MainViewController.m in Sources */,
 				84928DE21A09153200168208 /* ChatSessionViewController.m in Sources */,
 				848FB9111A07AED00014EDBC /* ChatAppNavigationController.m in Sources */,
+				52B9096F1A0D006400A17D8C /* ShowLocationViewController.m in Sources */,
 				529400461A02884000F93C54 /* AppDelegate.m in Sources */,
 				849272DD1A05A6F4004D5CE4 /* RegisterUserViewController.m in Sources */,
 				849272E11A05B2A4004D5CE4 /* UserDataInputValidator.m in Sources */,
