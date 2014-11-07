@@ -14,6 +14,7 @@
 
 @implementation MainViewController{
 
+    HomeScreenAnimationsGenerator *animationsGenerator;
     ChatAppNavigationController *navController;
     CLLocation *userLocation;
 }
@@ -25,6 +26,9 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     [super viewDidLoad];
     
     navController = [ChatAppNavigationController sharedSingleton];
+    
+    animationsGenerator = [[HomeScreenAnimationsGenerator alloc] initWithViewController:self];
+    [animationsGenerator generateAnimations];
     
     [self setButtonStyles];
     

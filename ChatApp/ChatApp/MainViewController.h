@@ -11,6 +11,7 @@
 #import "UsersTableViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "ChatAppNavigationController.h"
+#import "HomeScreenAnimationsGenerator.h"
 
 @interface MainViewController : UIViewController<UIAlertViewDelegate>
 
