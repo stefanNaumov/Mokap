@@ -39,26 +39,6 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     [self.messageToSend resignFirstResponder];
 }
 
-//  FIXME: Test Method
-- (IBAction)addRowTest:(id)sender {
-    if (testData.count > 18) {
-            [testData addObject: [NSString stringWithFormat:@"Check Resizing. Oh Yeah! %d", testData.count]];
-    }else{
-        [testData addObject: [NSString stringWithFormat:@"I Got Resized %@", testData[testData.count - 1]]];
-    }
-    
-    int count = testData.count-1;
-    
-    // Insert new Row
-        [self.tableView beginUpdates];
-        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject: [NSIndexPath indexPathForRow:count inSection:0]]  withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView endUpdates];
-    
-    
-    // Scroll down after inserting new Row
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:testData.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     dateBeforeNewMessages = [[NSDate alloc] init];
@@ -75,16 +55,12 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     
     // Refresh messages every 1.0 sec.
     [self refreshMessagesEvery:1.0];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 -(void)refreshForNewMessages{
     // Limit messages to 1337. Dunno how to say: do not limit
@@ -114,46 +90,41 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     BOOL hasPicture = [message[@"HasPicture"] boolValue];
     BOOL hasAudio = [message[@"HasAudio"] boolValue];
     NSString *text = message[@"TextMessage"];
-    if (hasPicture) {
+    if (hasPicture || hasAudio) {
+        cell.image.hidden = NO;
+        cell.messageText.hidden = YES;
         cell.image.contentMode = UIViewContentModeScaleAspectFit;
-        [cell.image setImage:[UIImage imageNamed:@"image"]];
-    } else if (hasAudio){
-        cell.image.contentMode = UIViewContentModeScaleAspectFit;
-        [cell.image setImage:[UIImage imageNamed:@"audio"]];
+        [cell.image setImage:[UIImage imageNamed:hasPicture ? @"image" : @"audio"]];
     }
-    else if (text.length > 0){
+    else //if (text.length > 0)
+    {
+        cell.image.hidden = YES;
+        cell.messageText.hidden = NO;
         cell.messageText.text = text;
     }
 
-    NSLog(@"Cell");
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    CGFloat result;
-//    result = 65;
-//    return result;
-    NSLog(@"Height");
     [self configureCell:_stubCell atIndexPath:indexPath];
     [_stubCell layoutSubviews];
     
     CGFloat height = [_stubCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    Message *message = testData[indexPath.row];
+    BOOL hasPicture = [message[@"HasPicture"] boolValue];
+    BOOL hasAudio = [message[@"HasAudio"] boolValue];
+    if (hasPicture || hasAudio) {
+        return [UIImage imageNamed:@"image"].size.width;
+    }
     return height + 1;
 }
 
 - (void)configureCell:(PictureUITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    Message *message = testData[indexPath.row % testData.count];
-    BOOL hasPicture = [message[@"HasPicture"] boolValue];
-    BOOL hasAudio = [message[@"HasAudio"] boolValue];
-    NSString *text = message[@"TextMessage"];
-    if (hasPicture || hasAudio) {
-        // Both ways picture or audio. 64x64
-        //TODO: what about -> cell.image.contentMode = UIViewContentModeScaleAspectFit;
-        [cell.image setImage:[UIImage imageNamed:@"image"]];
-    }
-    else if (text.length > 0){
-        cell.messageText.text = text;
+    NSString *textMessage = testData[indexPath.row][@"TextMessage"];
+    if (textMessage.length > 0){
+        cell.messageText.text = textMessage;
     }
 }
 
@@ -237,7 +208,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     NSDate *birthDay = [cal dateFromComponents:oct31th1989];
     
     // Get all (just 6) messages after my birthday. Dunno how to say: Any date.
-    [self getMessagesAfter:birthDay AndLimitTo:10];
+    [self getMessagesAfter:birthDay AndLimitTo:66];
 }
 
 - (void)getMessagesAfter:(NSDate *)Date AndLimitTo:(int)limit {
@@ -254,7 +225,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     __weak id weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"Successfully retrieved %d scores.", objects.count);
+            NSLog(@"Successfully retrieved %d scores. %d", objects.count, testData.count);
             if (objects.count > 0) {
                 dateBeforeNewMessages = ((PFObject*)[objects objectAtIndex:0]).createdAt;
                 [testData addObjectsFromArray:[[objects reverseObjectEnumerator] allObjects]];
