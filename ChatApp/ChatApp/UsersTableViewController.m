@@ -14,7 +14,7 @@
 
 @implementation UsersTableViewController{
     PFUser *loggedUser;
-    CoreDataHelper *dataHelper;
+    
 }
 
 - (void)viewDidLoad {
@@ -22,8 +22,7 @@
     
     loggedUser = [PFUser currentUser];
     
-    dataHelper = [[CoreDataHelper alloc] init];
-    [dataHelper setupCoreData];
+  
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -36,6 +35,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - Table view data source
 
