@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "ChatAppNavigationController.h"
 #import "MessageBalloonUITableViewCell.h"
 #import "PictureUITableViewCell.h"
 #import "ShowLocationViewController.h"
+#import "ShowPictureViewController.h"
 #import "CoreDataHelper.h"
 #import "ChatUser.h"
-#import "ShowPictureViewController.h"
 #import "Message.h"
 
 @interface ChatSessionViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>

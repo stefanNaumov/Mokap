@@ -12,6 +12,8 @@
     NSMutableArray *testData;
     PictureUITableViewCell *_stubCell;
     NSDate *dateBeforeNewMessages;
+    ChatAppNavigationController *navController;
+    CLLocation *userLocation;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -43,6 +45,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     [super viewDidLoad];
     dateBeforeNewMessages = [[NSDate alloc] init];
     testData = [[NSMutableArray alloc] init];
+    navController = [ChatAppNavigationController sharedSingleton];
     
     // Register Nib Cell
     UINib *cellNib = [UINib nibWithNibName:CellIdentifier bundle:[NSBundle mainBundle]];
@@ -54,7 +57,19 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     [self loadLatestMessageHistory];
     
     // Refresh messages every 1.0 sec.
-    [self refreshMessagesEvery:1.0];
+    SEL refreshForNewMessagesSelector = @selector(refreshForNewMessages);
+    [self callSelector:refreshForNewMessagesSelector Every:1.0];
+    
+    SEL refreshUserLocationSelector = @selector(refreshUserLocation);
+    [self callSelector:refreshUserLocationSelector Every:5.0];
+}
+
+-(void)refreshUserLocation{
+    userLocation = navController.locationManager.location;
+    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLocation:userLocation];
+    
+    self.loggedUser[@"location"] = geoPoint;
+    [self.loggedUser saveEventually];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -67,8 +82,8 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     [self getMessagesAfter:dateBeforeNewMessages AndLimitTo:1337];
 }
 
--(void)refreshMessagesEvery: (double) second{
-    [NSTimer scheduledTimerWithTimeInterval:second target:self selector:@selector(refreshForNewMessages) userInfo:nil repeats:YES];
+-(void)callSelector:(SEL)selector Every: (double) second{
+    [NSTimer scheduledTimerWithTimeInterval:second target:self selector:selector userInfo:nil repeats:YES];
 }
 
 #pragma mark - Table view data source
