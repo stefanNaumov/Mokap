@@ -114,12 +114,22 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
     [_dataHelper.context insertObject:logged];
     [_dataHelper.context insertObject:otherUser];
     
+    [_dataHelper saveContext];
+    
     NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"ChatUser"];
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES];
     [req setSortDescriptors:[NSArray arrayWithObject:sort]];
     
     //TODO pass the fetched array to tableview and reload it
     NSArray *fetched = [_dataHelper.context executeFetchRequest:req error:nil];
+    
+    for (ChatUser *user in fetched) {
+        NSLog(@"%@",user.username);
+        
+        for (ChatUser *chatter in user.chatters) {
+            NSLog(@"Chatters: %@",chatter.username);
+        }
+    }
     
 }
 
