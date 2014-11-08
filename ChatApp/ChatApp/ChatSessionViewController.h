@@ -16,6 +16,7 @@
 #import "CoreDataHelper.h"
 #import "ChatUser.h"
 #import "Message.h"
+#import "UserDataInputValidator.h"
 
 @interface ChatSessionViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 

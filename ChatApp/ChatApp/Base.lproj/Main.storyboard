@@ -238,7 +238,7 @@
                                 </connections>
                             </tableView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VNe-Wa-kE1">
-                                <rect key="frame" x="20" y="529" width="237" height="30"/>
+                                <rect key="frame" x="20" y="529" width="188" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
@@ -246,9 +246,9 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqv-x3-CWo">
-                                <rect key="frame" x="265" y="529" width="30" height="30"/>
+                                <rect key="frame" x="265" y="524" width="35" height="35"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title=">"/>
+                                <state key="normal" backgroundImage="send_64"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
@@ -258,8 +258,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ck5-Pl-Fez">
-                                <rect key="frame" x="210" y="486" width="35" height="35"/>
-                                <state key="normal" title="G">
+                                <rect key="frame" x="265" y="485" width="35" height="35"/>
+                                <state key="normal" backgroundImage="gps_64">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -270,11 +270,28 @@
                                     <segue destination="MP5-zp-Hv9" kind="modal" identifier="ShowLocationViewController" id="32i-36-rTJ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33e-bc-ZLE">
+                                <rect key="frame" x="265" y="526" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="mic_64">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ocn-XD-GW4">
+                                <rect key="frame" x="222" y="526" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="camera_64">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="messageToSend" destination="VNe-Wa-kE1" id="Z47-27-Bxj"/>
+                        <outlet property="openCamera" destination="Ocn-XD-GW4" id="4Ci-JB-Fjn"/>
+                        <outlet property="openRecord" destination="33e-bc-ZLE" id="jJ4-Tr-ugS"/>
+                        <outlet property="sendMessageButton" destination="Cqv-x3-CWo" id="uiQ-Xa-kxA"/>
                         <outlet property="tableView" destination="Es9-6d-Wct" id="LZI-eh-Sjd"/>
                         <segue destination="faf-p8-pDU" kind="modal" identifier="ShowPictureViewController" id="L1t-Eb-0Wc"/>
                     </connections>
@@ -318,7 +335,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q3A-Yp-dQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="L6P-rx-sqv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="383" y="578"/>
+            <point key="canvasLocation" x="382" y="569"/>
         </scene>
         <!--Show Picture View Controller-->
         <scene sceneID="tY2-te-9Jv">
@@ -362,6 +379,12 @@
             <point key="canvasLocation" x="-8" y="1233"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera_64" width="64" height="64"/>
+        <image name="gps_64" width="64" height="64"/>
+        <image name="mic_64" width="64" height="64"/>
+        <image name="send_64" width="64" height="64"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
