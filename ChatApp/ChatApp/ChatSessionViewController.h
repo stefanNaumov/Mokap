@@ -11,13 +11,10 @@
 #import "MessageBalloonUITableViewCell.h"
 #import "PictureUITableViewCell.h"
 #import "ShowLocationViewController.h"
-<<<<<<< Updated upstream
 #import "CoreDataHelper.h"
 #import "ChatUser.h"
-=======
 #import "ShowPictureViewController.h"
 #import "Message.h"
->>>>>>> Stashed changes
 
 @interface ChatSessionViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
