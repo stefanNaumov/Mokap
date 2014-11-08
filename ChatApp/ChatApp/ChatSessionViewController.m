@@ -7,10 +7,10 @@
 //
 
 #import "ChatSessionViewController.h"
-// TODO: Add refresh location on every ... for loggedUser
+// TODO: Add refresh location on every N for loggedUser
 @interface ChatSessionViewController (){
     NSMutableArray *testData;
-    MessageBalloonUITableViewCell *_stubCell;
+    PictureUITableViewCell *_stubCell;
     NSDate *dateBeforeNewMessages;
 }
 
@@ -19,18 +19,18 @@
 
 @end
 
-static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
+//static NSString *CellIdentifier1 = @"MessageBalloonUITableViewCell";
+static NSString *CellIdentifier = @"PictureUITableViewCell";
 
 @implementation ChatSessionViewController
 
 - (IBAction)sendMessage:(id)sender {
-    // FIXME: validate if empty -> return or disable button
+    // FIXME: validate if empty -> return AND* disable button
     // TODO: trim message before send
+    // TODO: just ONE, TextMessage OR picture OR audio!!!
     NSString *textToSend = self.messageToSend.text;
     PFObject *pfMessage = [PFObject objectWithClassName:@"Message"];
     pfMessage[@"TextMessage"] = textToSend;
-    // FIXME: Merge Author and User1 Maybe?
-    pfMessage[@"Author"] = self.loggedUser.username;
     pfMessage[@"User1"] = self.loggedUser.username;
     pfMessage[@"User2"] = self.otherUser.username;
     [pfMessage saveInBackground];
@@ -54,6 +54,7 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject: [NSIndexPath indexPathForRow:count inSection:0]]  withRowAnimation:UITableViewRowAnimationFade];
         [self.tableView endUpdates];
     
+    
     // Scroll down after inserting new Row
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:testData.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
@@ -61,7 +62,6 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     dateBeforeNewMessages = [[NSDate alloc] init];
-    // Do any additional setup after loading the view.
     testData = [[NSMutableArray alloc] init];
     
     // Register Nib Cell
@@ -107,12 +107,25 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
- 
-    MessageBalloonUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PictureUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Set cell Properties Here
-    cell.messageText.text = testData[indexPath.row];
-    
+    Message *message = testData[indexPath.row];
+    BOOL hasPicture = [message[@"HasPicture"] boolValue];
+    BOOL hasAudio = [message[@"HasAudio"] boolValue];
+    NSString *text = message[@"TextMessage"];
+    if (hasPicture) {
+        cell.image.contentMode = UIViewContentModeScaleAspectFit;
+        [cell.image setImage:[UIImage imageNamed:@"image"]];
+    } else if (hasAudio){
+        cell.image.contentMode = UIViewContentModeScaleAspectFit;
+        [cell.image setImage:[UIImage imageNamed:@"audio"]];
+    }
+    else if (text.length > 0){
+        cell.messageText.text = text;
+    }
+
+    NSLog(@"Cell");
     return cell;
 }
 
@@ -120,7 +133,7 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
 //    CGFloat result;
 //    result = 65;
 //    return result;
-    
+    NSLog(@"Height");
     [self configureCell:_stubCell atIndexPath:indexPath];
     [_stubCell layoutSubviews];
     
@@ -128,9 +141,38 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
     return height + 1;
 }
 
-- (void)configureCell:(MessageBalloonUITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(PictureUITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    cell.messageText.text = testData[indexPath.row % testData.count];
+    Message *message = testData[indexPath.row % testData.count];
+    BOOL hasPicture = [message[@"HasPicture"] boolValue];
+    BOOL hasAudio = [message[@"HasAudio"] boolValue];
+    NSString *text = message[@"TextMessage"];
+    if (hasPicture || hasAudio) {
+        // Both ways picture or audio. 64x64
+        //TODO: what about -> cell.image.contentMode = UIViewContentModeScaleAspectFit;
+        [cell.image setImage:[UIImage imageNamed:@"image"]];
+    }
+    else if (text.length > 0){
+        cell.messageText.text = text;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    PFObject *message = testData[indexPath.row];
+    NSString *text = message[@"TextMessage"];
+    BOOL hasPic = [message[@"HasPicture"] boolValue];
+    BOOL hasAudio = [message[@"HasAudio"] boolValue];
+
+    if (hasPic) {
+        NSLog(@"Pic");
+        [self performSegueWithIdentifier:@"ShowPictureViewController" sender:nil];
+    }
+    else if (hasAudio){
+        NSLog(@"Audio");
+    }
+    else if (text.length > 0){
+        NSLog(@"Text");
+    }
 }
 
 - (void)addLastCells:(int)count {
@@ -144,7 +186,25 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
     [self.tableView insertRowsAtIndexPaths: arr withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     
+    // Should not be executed everytime you got more than 51 messages
+    // this 51 constant should be more than loadLatestMessageHistory LimitTo number or it will be executed on start (useless execution)
+//    if (testData.count > 51) {
+//        NSMutableArray *last51MessagesOnly = [[NSMutableArray alloc] init];
+//        // change to forIn when testData no longer text only but Objects
+//        for (int i = 0; i < 51; i++) {
+//            PFObject *item = [testData objectAtIndex: testData.count - 51 + i];
+//            [last51MessagesOnly addObject:item];
+//        }
+//        NSLog(@"%d", last51MessagesOnly.count);
+//        testData = last51MessagesOnly;
+//        [self.tableView reloadData];
+//        NSLog(@"===================================\n=======================");
+//    }
+    
     // Scroll down after inserting new Rows
+    // FIXME: scroll ako COUNT > 0 demek ako nqma novi da ne skrolva
+    // demek ako scrollna nagore da vidq stari postove da ne scrollva osven ako nqma novo suob6tenie
+    // moej bi celiq method da se izvikva ako e > 0
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:testData.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
@@ -175,9 +235,9 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
     [oct31th1989 setMinute:33];
     [oct31th1989 setSecond:37];
     NSDate *birthDay = [cal dateFromComponents:oct31th1989];
+    
     // Get all (just 6) messages after my birthday. Dunno how to say: Any date.
-    [self getMessagesAfter:birthDay AndLimitTo:6];
-
+    [self getMessagesAfter:birthDay AndLimitTo:10];
 }
 
 - (void)getMessagesAfter:(NSDate *)Date AndLimitTo:(int)limit {
@@ -189,31 +249,17 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
     PFQuery *query = [PFQuery queryWithClassName:@"Message" predicate:predicate];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"createdAt" greaterThan:Date];
-    // TODO: Sort Messages proper. Check them out!!!
     query.limit = limit;
+    [query selectKeys:@[@"TextMessage", @"User1", @"User2", @"HasPicture", @"HasAudio", @"Picture", @"Audio"]];
+    __weak id weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            // The find succeeded.
             NSLog(@"Successfully retrieved %d scores.", objects.count);
-            
-            NSMutableArray *newMessages = [[NSMutableArray alloc] init];
-            // Do something with the found objects
-            NSMutableArray *dates = [[NSMutableArray alloc] init];
-            for (PFObject *object in objects) {
-                // TODO: Add all object instead of just text.
-                // Then in cellForRowAtIndexPath can use it as testData[indexPath.row].TextMessage
-                // Maybe Make Model?
-                [newMessages addObject:object[@"TextMessage"]];
-                [dates addObject:object.createdAt];
+            if (objects.count > 0) {
+                dateBeforeNewMessages = ((PFObject*)[objects objectAtIndex:0]).createdAt;
+                [testData addObjectsFromArray:[[objects reverseObjectEnumerator] allObjects]];
+                [weakSelf addLastCells:objects.count];
             }
-            NSLog(@" 1-------WTF------ %@", dateBeforeNewMessages);
-            if ([dates objectAtIndex:0]) {
-                NSLog(@" -------IN------ ");
-                dateBeforeNewMessages = [dates objectAtIndex:0];
-            }
-            NSLog(@" does NOT get print 2-------WTF------ %@", dateBeforeNewMessages);
-            [testData addObjectsFromArray:[[newMessages reverseObjectEnumerator] allObjects]];
-            [self addLastCells:newMessages.count];
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -222,13 +268,23 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
 }
 
  #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
+
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
-     ShowLocationViewController *slvc = [segue destinationViewController];
- // Pass the selected object to the new view controller.
-     slvc.otherUser = self.otherUser;
+     if ([[segue identifier] isEqualToString:@"ShowLocationViewController"])
+     {
+         ShowLocationViewController *slvc = [segue destinationViewController];
+         slvc.otherUser = self.otherUser;
+     }
+     else if ([[segue identifier] isEqualToString:@"ShowPictureViewController"]){
+         ShowPictureViewController *spvc = [segue destinationViewController];
+         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+         Message *msg = [[Message alloc] init];
+         msg[@"Picture"] = testData[path.row][@"Picture"];
+         spvc.message = msg;
+     }
  }
 
+-(IBAction)returnToChatSession:(UIStoryboardSegue *)segue {
+    NSLog(@"returnToChatSession unwind");
+}
 @end
