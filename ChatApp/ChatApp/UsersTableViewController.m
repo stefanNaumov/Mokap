@@ -16,7 +16,7 @@
     PFUser *loggedUser;
     PFUser *otherUser;
     CoreDataHelper *dataHelper;
-    
+    NSArray *allUsersBackup;
 }
 
 - (void)viewDidLoad {
@@ -82,13 +82,13 @@
     //TODO pass the fetched array to tableview and reload it
     NSArray *fetched = [dataHelper.context executeFetchRequest:req error:nil];
     
-    for (ChatUser *user in fetched) {
-        NSLog(@"%@",user.username);
-        
-        for (ChatUser *chatter in user.chatters) {
-            NSLog(@"Chatters: %@",chatter.username);
-        }
-    }
+//    for (ChatUser *user in fetched) {
+//        NSLog(@"%@",user.username);
+//        
+//        for (ChatUser *chatter in user.chatters) {
+//            NSLog(@"Chatters: %@",chatter.username);
+//        }
+//    }
     
     return fetched;
 }
@@ -138,17 +138,45 @@
 
 - (IBAction)swipeFilterUsers:(UIGestureRecognizer *)sender {
     
+    NSArray *fetched = [self fetchUsers];
+    NSArray *pfUsersFiltered = [self getPfUsers:fetched];
+    
     UISwipeGestureRecognizerDirection direction = [(UISwipeGestureRecognizer *) sender direction ];
     switch (direction) {
         case UISwipeGestureRecognizerDirectionLeft:
             //reload all users
+            self.users = allUsersBackup;
+            [self.tableView reloadData];
             break;
             case UISwipeGestureRecognizerDirectionRight:
+            
+            //backup all users
+            allUsersBackup = self.users;
+            
             //filter users
+            self.users = pfUsersFiltered;
+            [self.tableView reloadData];
             break;
         default:
             break;
     }
+}
+
+-(NSArray *) getPfUsers:(NSArray *) fetchedUsersFromDatabase{
+    NSMutableArray *usersArr = [[NSMutableArray alloc] init];
+    
+    for (PFUser *pfUser in self.users) {
+        for (ChatUser *modelUser in fetchedUsersFromDatabase) {
+            if ([pfUser.username isEqualToString:modelUser.username]) {
+                [usersArr addObject:pfUser];
+                break;
+            }
+        }
+    }
+    
+    NSArray *filtered = [[NSArray alloc] initWithArray:usersArr];
+    
+    return filtered;
 }
 /*
 // Override to support conditional editing of the table view.
