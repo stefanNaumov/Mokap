@@ -12,7 +12,6 @@
     NSMutableArray *testData;
     MessageBalloonUITableViewCell *_stubCell;
     NSDate *dateBeforeNewMessages;
-    CoreDataHelper *_dataHelper;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -77,10 +76,7 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
     // Refresh messages every 1.0 sec.
     [self refreshMessagesEvery:1.0];
     
-    _dataHelper = [[CoreDataHelper alloc] init];
-    [_dataHelper setupCoreData];
     
-    [self saveUsersToDataBase];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,50 +84,7 @@ static NSString *CellIdentifier = @"MessageBalloonUITableViewCell";
     // Dispose of any resources that can be recreated.
 }
 
--(void) saveUsersToDataBase{
-    
-    ChatUser *logged = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUser" inManagedObjectContext:_dataHelper.context];
-    logged.username = self.loggedUser.username;
-    
-    ChatUser *otherUser = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUser" inManagedObjectContext:_dataHelper.context];
-    otherUser.username = self.otherUser.username;
-    
-    NSMutableSet *chattersSet;
-    if (!logged.chatters) {
-        
-        chattersSet = [[NSMutableSet alloc] init];
-        [chattersSet addObject:otherUser];
-        
-        logged.chatters = chattersSet;
-    }
-    else{
-        chattersSet = [logged.chatters mutableCopy];
-        [chattersSet addObject:otherUser];
-        
-        logged.chatters = chattersSet;
-    }
-    
-    [_dataHelper.context insertObject:logged];
-    [_dataHelper.context insertObject:otherUser];
-    
-    [_dataHelper saveContext];
-    
-    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"ChatUser"];
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES];
-    [req setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    //TODO pass the fetched array to tableview and reload it
-    NSArray *fetched = [_dataHelper.context executeFetchRequest:req error:nil];
-    
-    for (ChatUser *user in fetched) {
-        NSLog(@"%@",user.username);
-        
-        for (ChatUser *chatter in user.chatters) {
-            NSLog(@"Chatters: %@",chatter.username);
-        }
-    }
-    
-}
+
 
 -(void)refreshForNewMessages{
     // Limit messages to 1337. Dunno how to say: do not limit

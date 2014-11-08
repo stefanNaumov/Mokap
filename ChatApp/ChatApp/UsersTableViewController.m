@@ -14,6 +14,8 @@
 
 @implementation UsersTableViewController{
     PFUser *loggedUser;
+    PFUser *otherUser;
+    CoreDataHelper *dataHelper;
     
 }
 
@@ -22,6 +24,10 @@
     
     loggedUser = [PFUser currentUser];
     
+    dataHelper = [[CoreDataHelper alloc] init];
+    [dataHelper setupCoreData];
+    
+    //[self saveUsersToDataBase];
   
     
     // Uncomment the following line to preserve selection between presentations.
@@ -36,6 +42,56 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) saveUsersToDataBase{
+    
+    ChatUser *logged = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUser" inManagedObjectContext:dataHelper.context];
+    logged.username = loggedUser.username;
+    
+    ChatUser *otherUserModel = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUser" inManagedObjectContext:dataHelper.context];
+    otherUserModel.username = otherUser.username;
+    
+    NSMutableSet *chattersSet;
+    if (!logged.chatters) {
+        
+        chattersSet = [[NSMutableSet alloc] init];
+        [chattersSet addObject:otherUser];
+        
+        logged.chatters = chattersSet;
+    }
+    else{
+        chattersSet = [logged.chatters mutableCopy];
+        [chattersSet addObject:otherUserModel];
+        
+        logged.chatters = chattersSet;
+    }
+    
+    [dataHelper.context insertObject:logged];
+    [dataHelper.context insertObject:otherUserModel];
+    
+    [dataHelper saveContext];
+    
+    
+}
+
+-(NSArray *) fetchUsers{
+    
+    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"ChatUser"];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES];
+    [req setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    //TODO pass the fetched array to tableview and reload it
+    NSArray *fetched = [dataHelper.context executeFetchRequest:req error:nil];
+    
+    for (ChatUser *user in fetched) {
+        NSLog(@"%@",user.username);
+        
+        for (ChatUser *chatter in user.chatters) {
+            NSLog(@"Chatters: %@",chatter.username);
+        }
+    }
+    
+    return fetched;
+}
 
 #pragma mark - Table view data source
 
@@ -69,7 +125,10 @@
     
     NSIndexPath *pathForOtherUser = [self.tableView indexPathForSelectedRow];
     
-    PFUser *otherUser = [self.users objectAtIndex:pathForOtherUser.row];
+    otherUser = [self.users objectAtIndex:pathForOtherUser.row];
+    
+    //we have the two users - save them to database
+    [self saveUsersToDataBase];
     
     ChatSessionViewController *controller = [segue destinationViewController];
     [controller setLoggedUser:loggedUser];
@@ -77,7 +136,20 @@
 
 }
 
-
+- (IBAction)swipeFilterUsers:(UIGestureRecognizer *)sender {
+    
+    UISwipeGestureRecognizerDirection direction = [(UISwipeGestureRecognizer *) sender direction ];
+    switch (direction) {
+        case UISwipeGestureRecognizerDirectionLeft:
+            //reload all users
+            break;
+            case UISwipeGestureRecognizerDirectionRight:
+            //filter users
+            break;
+        default:
+            break;
+    }
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -121,5 +193,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

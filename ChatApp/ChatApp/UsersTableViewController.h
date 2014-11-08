@@ -15,5 +15,7 @@
 @interface UsersTableViewController : UITableViewController
 
 @property (nonatomic) NSArray *users;
+- (IBAction)swipeFilterUsers:(UIGestureRecognizer *)sender;
+
 
 @end
