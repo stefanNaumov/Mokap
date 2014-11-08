@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface ShowLocationViewController : UIViewController
+@interface ShowLocationViewController : UIViewController<MKMapViewDelegate>
 
 @property (nonatomic) PFUser *otherUser;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end

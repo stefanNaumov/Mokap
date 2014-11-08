@@ -8,8 +8,12 @@
 
 #import "ShowLocationViewController.h"
 
-@interface ShowLocationViewController ()
+@interface ShowLocationViewController (){
 
+    PFGeoPoint *location;
+    MKCoordinateRegion region;
+    MKPointAnnotation *annotation;
+}
 @end
 
 @implementation ShowLocationViewController
@@ -28,7 +32,31 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    location = self.otherUser[@"location"];
+    
+    
+
+    NSLog(@"%@",location);
+    
     [[[UIAlertView alloc] initWithTitle:@"Other username is: " message:[NSString stringWithFormat:@"You chat with: %@", self.otherUser.username] delegate:nil cancelButtonTitle:@"Бегам!" otherButtonTitles:nil, nil] show];
+    
+    CLLocationCoordinate2D coord;
+    coord.longitude = location.longitude;
+    coord.latitude = location.latitude;
+    
+    annotation = [[MKPointAnnotation alloc] init];
+    annotation.coordinate = coord;
+    annotation.title = self.otherUser.username;
+    
+    region.center.longitude = location.longitude;
+    region.center.latitude = location.latitude;
+    region.span.longitudeDelta = 0.005;
+    region.span.latitudeDelta = 0.005;
+    
+    [self.mapView setCenterCoordinate:coord animated:YES];
+    [self.mapView setRegion:region];
+    [self.mapView addAnnotation:annotation];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,6 +64,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+    
+    }
 
 /*
 #pragma mark - Navigation

@@ -298,8 +298,16 @@
                     <view key="view" contentMode="scaleToFill" id="pfZ-9t-qau">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oLk-SZ-O3h">
+                                <rect key="frame" x="0.0" y="-8" width="320" height="499"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="oLk-SZ-O3h" id="bXn-H1-iBx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q3A-Yp-dQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

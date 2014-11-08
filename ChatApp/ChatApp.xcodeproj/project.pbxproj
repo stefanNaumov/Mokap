@@ -33,6 +33,7 @@
 		849998251A0E173100933216 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849998241A0E173100933216 /* CoreData.framework */; };
 		849998281A0E176400933216 /* ChatAppDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 849998261A0E176400933216 /* ChatAppDataModel.xcdatamodeld */; };
 		8499982B1A0E17DF00933216 /* ChatUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499982A1A0E17DF00933216 /* ChatUser.m */; };
+		8499982D1A0E692700933216 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8499982C1A0E692700933216 /* MapKit.framework */; };
 		84A79AE31A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A79AE21A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m */; };
 		84EBCCAA1A02DE7500C97E72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */; };
 		84EBCCAC1A02DEBC00C97E72 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */; };
@@ -98,6 +99,7 @@
 		849998271A0E176400933216 /* ChatAppDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatAppDataModel.xcdatamodel; sourceTree = "<group>"; };
 		849998291A0E17DF00933216 /* ChatUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatUser.h; sourceTree = "<group>"; };
 		8499982A1A0E17DF00933216 /* ChatUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatUser.m; sourceTree = "<group>"; };
+		8499982C1A0E692700933216 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		84A79AE11A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenAnimationsGenerator.h; sourceTree = "<group>"; };
 		84A79AE21A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenAnimationsGenerator.m; sourceTree = "<group>"; };
 		84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -118,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8499982D1A0E692700933216 /* MapKit.framework in Frameworks */,
 				849998251A0E173100933216 /* CoreData.framework in Frameworks */,
 				84EBCCBA1A02DF4500C97E72 /* SystemConfiguration.framework in Frameworks */,
 				84EBCCB81A02DF3600C97E72 /* StoreKit.framework in Frameworks */,
@@ -171,6 +174,7 @@
 		529400341A02884000F93C54 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8499982C1A0E692700933216 /* MapKit.framework */,
 				849998241A0E173100933216 /* CoreData.framework */,
 				84EBCCBF1A02E3F100C97E72 /* Bolts.framework */,
 				84EBCCBD1A02E3F000C97E72 /* Parse.framework */,
