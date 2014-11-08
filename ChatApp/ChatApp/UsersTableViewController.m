@@ -17,6 +17,8 @@
     PFUser *otherUser;
     CoreDataHelper *dataHelper;
     NSArray *allUsersBackup;
+    UISwipeGestureRecognizer *gestureRecLeft;
+    UISwipeGestureRecognizer *gestRecRight;
 }
 
 - (void)viewDidLoad {
@@ -24,11 +26,17 @@
     
     loggedUser = [PFUser currentUser];
     
+    gestureRecLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeFilterUsers:)];
+    gestureRecLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    gestRecRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeFilterUsers:)];
+    gestRecRight.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [self.tableView addGestureRecognizer:gestureRecLeft];
+    [self.tableView addGestureRecognizer:gestRecRight];
+    
     dataHelper = [[CoreDataHelper alloc] init];
     [dataHelper setupCoreData];
-    
-    //[self saveUsersToDataBase];
-  
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -37,9 +45,14 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleNone;
 }
 
 -(void) saveUsersToDataBase{
@@ -115,7 +128,7 @@
     PFObject *user = [self.users objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [user objectForKey:@"username"];
-
+    
     return cell;
 }
 

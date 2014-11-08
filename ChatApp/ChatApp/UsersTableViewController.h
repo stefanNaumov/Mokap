@@ -12,7 +12,7 @@
 #import "CoreDataHelper.h"
 #import "ChatUser.h"
 
-@interface UsersTableViewController : UITableViewController
+@interface UsersTableViewController : UITableViewController<UIGestureRecognizerDelegate>
 
 @property (nonatomic) NSArray *users;
 - (IBAction)swipeFilterUsers:(UIGestureRecognizer *)sender;
