@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "ChatSessionViewController.h"
+#import "CoreDataHelper.h"
+#import "ChatUser.h"
 
 @interface UsersTableViewController : UITableViewController
 

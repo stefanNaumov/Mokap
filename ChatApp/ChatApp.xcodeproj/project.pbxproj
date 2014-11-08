@@ -29,6 +29,10 @@
 		849272DD1A05A6F4004D5CE4 /* RegisterUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849272DC1A05A6F4004D5CE4 /* RegisterUserViewController.m */; };
 		849272E11A05B2A4004D5CE4 /* UserDataInputValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 849272E01A05B2A4004D5CE4 /* UserDataInputValidator.m */; };
 		84928DE21A09153200168208 /* ChatSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84928DE11A09153200168208 /* ChatSessionViewController.m */; };
+		849998231A0E16DB00933216 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 849998221A0E16DB00933216 /* CoreDataHelper.m */; };
+		849998251A0E173100933216 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849998241A0E173100933216 /* CoreData.framework */; };
+		849998281A0E176400933216 /* ChatAppDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 849998261A0E176400933216 /* ChatAppDataModel.xcdatamodeld */; };
+		8499982B1A0E17DF00933216 /* ChatUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499982A1A0E17DF00933216 /* ChatUser.m */; };
 		84A79AE31A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A79AE21A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m */; };
 		84EBCCAA1A02DE7500C97E72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */; };
 		84EBCCAC1A02DEBC00C97E72 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */; };
@@ -88,6 +92,12 @@
 		849272E01A05B2A4004D5CE4 /* UserDataInputValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataInputValidator.m; sourceTree = "<group>"; };
 		84928DE01A09153200168208 /* ChatSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatSessionViewController.h; sourceTree = "<group>"; };
 		84928DE11A09153200168208 /* ChatSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatSessionViewController.m; sourceTree = "<group>"; };
+		849998211A0E16CE00933216 /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
+		849998221A0E16DB00933216 /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
+		849998241A0E173100933216 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		849998271A0E176400933216 /* ChatAppDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatAppDataModel.xcdatamodel; sourceTree = "<group>"; };
+		849998291A0E17DF00933216 /* ChatUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatUser.h; sourceTree = "<group>"; };
+		8499982A1A0E17DF00933216 /* ChatUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatUser.m; sourceTree = "<group>"; };
 		84A79AE11A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenAnimationsGenerator.h; sourceTree = "<group>"; };
 		84A79AE21A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenAnimationsGenerator.m; sourceTree = "<group>"; };
 		84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -108,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849998251A0E173100933216 /* CoreData.framework in Frameworks */,
 				84EBCCBA1A02DF4500C97E72 /* SystemConfiguration.framework in Frameworks */,
 				84EBCCB81A02DF3600C97E72 /* StoreKit.framework in Frameworks */,
 				84EBCCB61A02DF3000C97E72 /* Security.framework in Frameworks */,
@@ -160,6 +171,7 @@
 		529400341A02884000F93C54 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				849998241A0E173100933216 /* CoreData.framework */,
 				84EBCCBF1A02E3F100C97E72 /* Bolts.framework */,
 				84EBCCBD1A02E3F000C97E72 /* Parse.framework */,
 				84EBCCB91A02DF4500C97E72 /* SystemConfiguration.framework */,
@@ -193,6 +205,9 @@
 				5294004B1A02884100F93C54 /* MainViewController.m */,
 				5294004D1A02884100F93C54 /* Images.xcassets */,
 				5294003C1A02884000F93C54 /* Supporting Files */,
+				849998261A0E176400933216 /* ChatAppDataModel.xcdatamodeld */,
+				849998291A0E17DF00933216 /* ChatUser.h */,
+				8499982A1A0E17DF00933216 /* ChatUser.m */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -239,6 +254,8 @@
 		848FB90E1A07AE970014EDBC /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				849998221A0E16DB00933216 /* CoreDataHelper.m */,
+				849998211A0E16CE00933216 /* CoreDataHelper.h */,
 				848FB90F1A07AED00014EDBC /* ChatAppNavigationController.h */,
 				848FB9101A07AED00014EDBC /* ChatAppNavigationController.m */,
 				84A79AE11A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.h */,
@@ -371,10 +388,13 @@
 			files = (
 				52D376C61A0ACD0A000DF7EF /* MessageBalloonUITableViewCell.m in Sources */,
 				84A79AE31A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m in Sources */,
+				849998281A0E176400933216 /* ChatAppDataModel.xcdatamodeld in Sources */,
 				5294004C1A02884100F93C54 /* MainViewController.m in Sources */,
+				8499982B1A0E17DF00933216 /* ChatUser.m in Sources */,
 				84928DE21A09153200168208 /* ChatSessionViewController.m in Sources */,
 				848FB9111A07AED00014EDBC /* ChatAppNavigationController.m in Sources */,
 				52B9096F1A0D006400A17D8C /* ShowLocationViewController.m in Sources */,
+				849998231A0E16DB00933216 /* CoreDataHelper.m in Sources */,
 				529400461A02884000F93C54 /* AppDelegate.m in Sources */,
 				849272DD1A05A6F4004D5CE4 /* RegisterUserViewController.m in Sources */,
 				849272E11A05B2A4004D5CE4 /* UserDataInputValidator.m in Sources */,
@@ -604,6 +624,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		849998261A0E176400933216 /* ChatAppDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				849998271A0E176400933216 /* ChatAppDataModel.xcdatamodel */,
+			);
+			currentVersion = 849998271A0E176400933216 /* ChatAppDataModel.xcdatamodel */;
+			path = ChatAppDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5294002A1A02884000F93C54 /* Project object */;
 }
