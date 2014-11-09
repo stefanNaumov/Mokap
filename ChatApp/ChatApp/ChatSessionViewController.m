@@ -60,10 +60,11 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 }
 
 - (IBAction)sendMessage:(id)sender {
-    // FIXME: validate if empty -> return AND* disable button
-    // TODO: trim message before send
-    // TODO: just ONE, TextMessage OR picture OR audio!!!
-    NSString *textToSend = self.messageToSend.text;
+    NSString *textToSend = trimAll(self.messageToSend.text);
+    if ([textToSend length] <= 0) {
+        // Just to be sure can be added Alert
+        return;
+    }
     Message *pfMessage = [Message objectWithClassName:[Message parseClassName]];
     pfMessage.TextMessage = textToSend;
     pfMessage.User1 = self.loggedUser.username;
@@ -76,7 +77,6 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 }
 
 - (void)viewDidLoad {
-    NSLog(@"viewDidLoad");
     [super viewDidLoad];
     // Hide send button if no message in the textField
     self.title = [NSString stringWithFormat:@"Chat with: '%@'", self.otherUser.username];
@@ -143,6 +143,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     PictureUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
     // Set cell Properties Here
     Message *message = testData[indexPath.row];
     NSString *author = message.User1;
@@ -178,8 +179,8 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     
     CGFloat height = [_stubCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     Message *message = testData[indexPath.row];
-    BOOL hasPicture = [message[@"HasPicture"] boolValue];
-    BOOL hasAudio = [message[@"HasAudio"] boolValue];
+    BOOL hasPicture = message.HasPicture;
+    BOOL hasAudio = message.HasAudio;
     if (hasPicture || hasAudio) {
         return [UIImage imageNamed:@"image"].size.width;
     }
@@ -188,17 +189,17 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 
 - (void)configureCell:(PictureUITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *textMessage = testData[indexPath.row][@"TextMessage"];
-    if (textMessage.length > 0){
-        cell.messageText.text = textMessage;
+    Message *message = testData[indexPath.row];
+    if (message.TextMessage > 0){
+        cell.messageText.text = message.TextMessage;
     }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    PFObject *message = testData[indexPath.row];
-    NSString *text = message[@"TextMessage"];
-    BOOL hasPic = [message[@"HasPicture"] boolValue];
-    BOOL hasAudio = [message[@"HasAudio"] boolValue];
+    Message *message = testData[indexPath.row];
+    NSString *text = message.TextMessage;
+    BOOL hasPic = message.HasPicture;
+    BOOL hasAudio = message.HasAudio;
 
     if (hasPic) {
         NSLog(@"Pic");
@@ -274,7 +275,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     [oct31th1989 setSecond:37];
     NSDate *birthDay = [cal dateFromComponents:oct31th1989];
     
-    // Get all (just 6) messages after my birthday. Dunno how to say: Any date.
+    // Get all (just 15) messages after my birthday. Dunno how to say: Any date.
     [self getMessagesAfter:birthDay AndLimitTo:15];
 }
 
@@ -292,7 +293,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     __weak id weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"Successfully retrieved %d scores. %d", objects.count, testData.count);
+            NSLog(@"Successfully retrieved %d messages. %d", objects.count, testData.count);
             if (objects.count > 0) {
                 dateBeforeNewMessages = ((PFObject*)[objects objectAtIndex:0]).createdAt;
                 [testData addObjectsFromArray:[[objects reverseObjectEnumerator] allObjects]];
@@ -347,7 +348,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 -(void)setViewMovedUp:(BOOL)movedUp
 {
     [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    [UIView setAnimationDuration:0.25]; // if you want to slide up the view
     
     CGRect rect = self.view.frame;
     if (movedUp)
@@ -386,7 +387,6 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    NSLog(@"viewWillDisappear");
     [super viewWillDisappear:animated];
     // unregister for keyboard notifications while not visible.
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -413,14 +413,14 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
          ShowPictureViewController *spvc = [segue destinationViewController];
          NSIndexPath *path = [self.tableView indexPathForSelectedRow];
          Message *msg = [[Message alloc] init];
-         msg[@"Picture"] = testData[path.row][@"Picture"];
+         msg.Picture = testData[path.row][@"Picture"];
          spvc.message = msg;
      }
      else if ([[segue identifier] isEqualToString:@"ShowAudioViewController"]){
          ShowAudioViewController *savc = [segue destinationViewController];
          NSIndexPath *path = [self.tableView indexPathForSelectedRow];
          Message *msg = [[Message alloc] init];
-         msg[@"Audio"] = testData[path.row][@"Audio"];
+         msg.Audio = testData[path.row][@"Audio"];
          savc.message = msg;
      }
  }

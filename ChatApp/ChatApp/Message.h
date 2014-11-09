@@ -18,7 +18,7 @@
 @property (retain) NSString *User2;
 @property BOOL HasPicture;
 @property BOOL HasAudio;
-@property (retain) NSString *Picture;
-@property (retain) NSString *Audio;
+@property (retain) PFFile *Picture;
+@property (retain) PFFile *Audio;
 
 @end

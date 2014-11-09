@@ -26,9 +26,8 @@
     return self;
 }
 -(void)viewDidAppear:(BOOL)animated{
-    NSLog(@"viewDidAppear");
     __weak id weakSelf = self;
-    [self.message[@"Picture"] getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+    [self.message.Picture getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         if (!error) {
             UIImage *image = [UIImage imageWithData:imageData];
             _imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -46,29 +45,10 @@
 
 - (void)viewDidLoad
 {
-    NSLog(@"Called");
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     self.imageView.hidden = YES;
     self.progressView.progress = 0.0f;
-    
-    //self.progressView = [[UIProgressView alloc] init];
-    
-    //    PFQuery *query = [PFQuery queryWithClassName:@"Message"];
-    //    [query selectKeys:@[@"Picture"]];
-    //
-    //    [query getObjectInBackgroundWithId:self.message.objectId block:^(PFObject *message, NSError *error) {
-    //        if (!error) {
-    //            PFFile *pic = message[@"Picture"];
-    //            NSData *imageData = [pic getData];
-    //            UIImage *image = [UIImage imageWithData:imageData];
-    //            _imageView.contentMode = UIViewContentModeScaleAspectFit;
-    //            _imageView.image = image;
-    //            _imageView.hidden = NO;
-    //            _progressView.hidden = YES;
-    //        }
-    //        
-    //    }];
 }
 
 - (void)didReceiveMemoryWarning

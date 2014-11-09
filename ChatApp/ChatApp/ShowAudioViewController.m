@@ -27,9 +27,8 @@
     return self;
 }
 -(void)viewDidAppear:(BOOL)animated{
-    NSLog(@"viewDidAppear");
     __weak id weakSelf = self;
-    [self.message[@"Audio"] getDataInBackgroundWithBlock:^(NSData *audioData, NSError *error) {
+    [self.message.Audio getDataInBackgroundWithBlock:^(NSData *audioData, NSError *error) {
         if (!error) {
             audioPlayer = [[AVAudioPlayer alloc] initWithData:audioData error:&error];
             
