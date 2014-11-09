@@ -36,6 +36,7 @@
     
     logged = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUser" inManagedObjectContext:dataHelper.context];
     logged.username = loggedUser.username;
+    [dataHelper.context insertObject:logged];
     
     deleteBtnImage = [UIImage imageNamed:@"Delete-button"];
     deleteHistoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -94,7 +95,7 @@
     
     [logged addChatUsersObject:otherUserModel];
     
-    [dataHelper.context insertObject:logged];
+    
     [dataHelper.context insertObject:otherUserModel];
     
     [dataHelper saveContext];
