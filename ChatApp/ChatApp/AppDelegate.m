@@ -17,6 +17,8 @@
                   clientKey:@"TB0D2URJLs5ebim2yP2Bd6vidGp1fDQMOwGaS4NY"];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    [self.window setTintColor:[UIColor colorWithRed:220.0/255 green:140.0/255 blue:85.0/255 alpha:1.0]];
     // Override point for customization after application launch.
     return YES;
 }

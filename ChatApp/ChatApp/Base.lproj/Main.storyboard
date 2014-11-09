@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="NOi-Wj-QFP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="NOi-Wj-QFP">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller - Log In-->
+        <!--Log In-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController title="Log In" id="vXZ-lx-hvc" customClass="MainViewController" sceneMemberID="viewController">
@@ -88,7 +89,7 @@
             </objects>
             <point key="canvasLocation" x="69" y="-192"/>
         </scene>
-        <!--Register User View Controller - Sign Up-->
+        <!--Sign Up-->
         <scene sceneID="5wY-oa-wdc">
             <objects>
                 <viewController title="Sign Up" id="Y38-CK-rVe" customClass="RegisterUserViewController" sceneMemberID="viewController">
@@ -173,14 +174,16 @@
             </objects>
             <point key="canvasLocation" x="511" y="-192"/>
         </scene>
-        <!--Users Table View Controller - Chat People List-->
+        <!--Chat People List-->
         <scene sceneID="Rk5-1s-knX">
             <objects>
                 <tableViewController title="Chat People List" id="KvM-gu-W5Q" customClass="UsersTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="EaY-7p-Rgu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.78074542800000002" blue="0.53107234920000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="separatorColor" red="0.90228006110000003" green="0.84522264270000003" blue="0.67886896549999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.90228006110000003" green="0.84522264270000003" blue="0.67886896549999998" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="bgq-O5-erl">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -189,6 +192,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.90228006110000003" green="0.84522264270000003" blue="0.67886896549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <segue destination="KAU-wo-HaM" kind="push" id="66Z-hf-zJC"/>
@@ -218,7 +222,7 @@
             </objects>
             <point key="canvasLocation" x="-500" y="569"/>
         </scene>
-        <!--Chat Session View Controller - Chat Session-->
+        <!--Chat Session-->
         <scene sceneID="mWw-Y7-w40">
             <objects>
                 <viewController title="Chat Session" id="KAU-wo-HaM" customClass="ChatSessionViewController" sceneMemberID="viewController">
@@ -273,14 +277,12 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33e-bc-ZLE">
                                 <rect key="frame" x="265" y="526" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="mic_64">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ocn-XD-GW4">
                                 <rect key="frame" x="222" y="526" width="35" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="camera_64">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -393,7 +395,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiI-az-M7n">
                                 <rect key="frame" x="20" y="20" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Go Back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -403,7 +404,6 @@
                             </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="EaQ-xZ-pH9">
                                 <rect key="frame" x="20" y="283" width="280" height="3"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

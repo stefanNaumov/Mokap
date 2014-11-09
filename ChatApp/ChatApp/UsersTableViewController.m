@@ -31,6 +31,8 @@
     
     dataHelper = [[CoreDataHelper alloc] init];
     [dataHelper setupCoreData];
+   
+    //self.navigationController.navigationBar.tintColor = [UIColor redColor];
     
     loggedUser = [PFUser currentUser];
     
