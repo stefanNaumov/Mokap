@@ -225,26 +225,24 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     [self.tableView insertRowsAtIndexPaths: arr withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     
-    // Should not be executed everytime you got more than 51 messages
-    // this 51 constant should be more than loadLatestMessageHistory LimitTo number or it will be executed on start (useless execution)
-//    if (testData.count > 51) {
-//        NSMutableArray *last51MessagesOnly = [[NSMutableArray alloc] init];
-//        // change to forIn when testData no longer text only but Objects
-//        for (int i = 0; i < 51; i++) {
-//            PFObject *item = [testData objectAtIndex: testData.count - 51 + i];
-//            [last51MessagesOnly addObject:item];
-//        }
-//        NSLog(@"%d", last51MessagesOnly.count);
-//        testData = last51MessagesOnly;
-//        [self.tableView reloadData];
-//        NSLog(@"===================================\n=======================");
-//    }
+    // Shrink
+    static int shrinkSize = 40;
+    if (testData.count > shrinkSize * 2) {
+        [self cutOldMessagesFromTableView:shrinkSize];
+    }
     
-    // Scroll down after inserting new Rows
-    // FIXME: scroll ako COUNT > 0 demek ako nqma novi da ne skrolva
-    // demek ako scrollna nagore da vidq stari postove da ne scrollva osven ako nqma novo suob6tenie
-    // moej bi celiq method da se izvikva ako e > 0
+    // Scroll to latest message
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:testData.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (void)cutOldMessagesFromTableView:(int)shrinkSize {
+    NSMutableArray *lastMessagesOnly = [[NSMutableArray alloc] init];
+    for (int i = 0; i < shrinkSize; i++) {
+        Message *item = [testData objectAtIndex: testData.count - shrinkSize + i];
+        [lastMessagesOnly addObject:item];
+    }
+    testData = lastMessagesOnly;
+    [self.tableView reloadData];
 }
 
 /*
