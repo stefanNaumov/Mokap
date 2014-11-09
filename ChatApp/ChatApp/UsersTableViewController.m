@@ -40,7 +40,7 @@
     logged.username = loggedUser.username;
     [dataHelper.context insertObject:logged];
     
-    deleteBtnImage = [UIImage imageNamed:@"Delete-button"];
+    deleteBtnImage = [UIImage imageNamed:@"clear_history"];
     deleteHistoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [deleteHistoryBtn setImage:deleteBtnImage forState:UIControlStateNormal];
     deleteHistoryBtn.showsTouchWhenHighlighted = YES;
