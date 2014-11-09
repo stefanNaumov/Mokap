@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "ChatAppNavigationController.h"
-#import "MessageBalloonUITableViewCell.h"
 #import "PictureUITableViewCell.h"
 #import "ShowLocationViewController.h"
 #import "ShowPictureViewController.h"
