@@ -19,12 +19,13 @@
     CLLocation *userLocation;
 }
 
+static NSString *MostImportantConstantEver = @"Welcome To ChatApp!";
 static NSString *usersTableViewSegue = @"usersTableViewSegue";
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.title = MostImportantConstantEver;
     navController = [ChatAppNavigationController sharedSingleton];
     
     animationsGenerator = [[HomeScreenAnimationsGenerator alloc] initWithViewController:self];
