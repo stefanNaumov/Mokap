@@ -16,6 +16,7 @@
     NSDate *dateBeforeNewMessages;
     ChatAppNavigationController *navController;
     CLLocation *userLocation;
+    NSMutableArray *timerRefreshWithSelector;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -62,6 +63,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 }
 
 - (void)viewDidLoad {
+    NSLog(@"viewDidLoad");
     [super viewDidLoad];
     // Hide send button if no message in the textField
     self.title = [NSString stringWithFormat:@"Chat with: '%@'", self.otherUser.username];
@@ -69,6 +71,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     [self.messageToSend addTarget:self action:@selector(userTextInputChanged)forControlEvents:UIControlEventEditingChanged];
     
     // Initialize
+    timerRefreshWithSelector =[[NSMutableArray alloc] init];
     dateBeforeNewMessages = [[NSDate alloc] init];
     testData = [[NSMutableArray alloc] init];
     navController = [ChatAppNavigationController sharedSingleton];
@@ -109,7 +112,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 }
 
 -(void)callSelector:(SEL)selector Every: (double) second{
-    [NSTimer scheduledTimerWithTimeInterval:second target:self selector:selector userInfo:nil repeats:YES];
+    [timerRefreshWithSelector addObject:[NSTimer scheduledTimerWithTimeInterval:second target:self selector:selector userInfo:nil repeats:YES]];
 }
 
 #pragma mark - Table view data source
@@ -361,6 +364,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    NSLog(@"viewWillDisappear");
     [super viewWillDisappear:animated];
     // unregister for keyboard notifications while not visible.
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -370,6 +374,9 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
                                                   object:nil];
+    for (NSTimer *timer in timerRefreshWithSelector) {
+        [timer invalidate];
+    }
 }
 
  #pragma mark - Navigation
