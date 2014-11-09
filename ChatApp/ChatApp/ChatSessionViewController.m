@@ -62,7 +62,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 - (IBAction)sendMessage:(id)sender {
     NSString *textToSend = trimAll(self.messageToSend.text);
     if ([textToSend length] <= 0) {
-        // Just to be sure can be added Alert
+        NSLog(@"Did not send message!");
         return;
     }
     Message *pfMessage = [Message objectWithClassName:[Message parseClassName]];
@@ -258,6 +258,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self sendMessage:self];
     [textField resignFirstResponder];
     return YES;
 }
