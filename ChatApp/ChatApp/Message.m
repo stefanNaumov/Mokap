@@ -13,7 +13,13 @@
 
 @implementation Message
 
-@dynamic displayName;
+@dynamic TextMessage;
+@dynamic User1;
+@dynamic User2;
+@dynamic HasPicture;
+@dynamic HasAudio;
+@dynamic Picture;
+@dynamic Audio;
 
 + (void)load {
     [self registerSubclass];

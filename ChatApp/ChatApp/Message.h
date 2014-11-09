@@ -13,6 +13,12 @@
 
 + (NSString *)parseClassName;
 
-@property (retain) NSString *displayName;
+@property (retain) NSString *TextMessage;
+@property (retain) NSString *User1;
+@property (retain) NSString *User2;
+@property BOOL HasPicture;
+@property BOOL HasAudio;
+@property (retain) NSString *Picture;
+@property (retain) NSString *Audio;
 
 @end

@@ -30,7 +30,6 @@
 
 @end
 
-//static NSString *CellIdentifier1 = @"MessageBalloonUITableViewCell";
 static NSString *CellIdentifier = @"PictureUITableViewCell";
 
 @implementation ChatSessionViewController
@@ -65,10 +64,10 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     // TODO: trim message before send
     // TODO: just ONE, TextMessage OR picture OR audio!!!
     NSString *textToSend = self.messageToSend.text;
-    PFObject *pfMessage = [PFObject objectWithClassName:@"Message"];
-    pfMessage[@"TextMessage"] = textToSend;
-    pfMessage[@"User1"] = self.loggedUser.username;
-    pfMessage[@"User2"] = self.otherUser.username;
+    Message *pfMessage = [Message objectWithClassName:[Message parseClassName]];
+    pfMessage.TextMessage = textToSend;
+    pfMessage.User1 = self.loggedUser.username;
+    pfMessage.User2 = self.otherUser.username;
     [pfMessage saveInBackground];
     
     [self.messageToSend setText:@""];
@@ -146,7 +145,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     PictureUITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     // Set cell Properties Here
     Message *message = testData[indexPath.row];
-    NSString *author = message[@"User1"];
+    NSString *author = message.User1;
     if ([author isEqualToString:self.loggedUser.username]) {
         [cell setBackgroundColor:self.weakGreenColor];
     }
@@ -154,9 +153,9 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
         [cell setBackgroundColor:self.weakRedColor];
     }
     
-    BOOL hasPicture = [message[@"HasPicture"] boolValue];
-    BOOL hasAudio = [message[@"HasAudio"] boolValue];
-    NSString *text = message[@"TextMessage"];
+    BOOL hasPicture = message.HasPicture;
+    BOOL hasAudio = message.HasAudio;
+    NSString *text = message.TextMessage;
     if (hasPicture || hasAudio) {
         cell.image.hidden = NO;
         cell.messageText.hidden = YES;
@@ -285,7 +284,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     NSString *format = [NSString stringWithFormat:@"(User1 = '%@' OR User1 = '%@') AND (User2 = '%@' OR User2 = '%@')",user1,user2,user1,user2];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:format];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Message" predicate:predicate];
+    PFQuery *query = [PFQuery queryWithClassName:[Message parseClassName] predicate:predicate];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"createdAt" greaterThan:Date];
     query.limit = limit;
