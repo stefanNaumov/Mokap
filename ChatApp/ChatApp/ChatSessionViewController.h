@@ -13,6 +13,7 @@
 #import "PictureUITableViewCell.h"
 #import "ShowLocationViewController.h"
 #import "ShowPictureViewController.h"
+#import "ShowAudioViewController.h"
 #import "CoreDataHelper.h"
 #import "ChatUser.h"
 #import "Message.h"

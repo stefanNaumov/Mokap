@@ -59,6 +59,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     
     [self.messageToSend setText:@""];
     [self.messageToSend resignFirstResponder];
+    [self userTextInputChanged];
 }
 
 - (void)viewDidLoad {
@@ -181,6 +182,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     }
     else if (hasAudio){
         NSLog(@"Audio");
+        [self performSegueWithIdentifier:@"ShowAudioViewController" sender:nil];
     }
     else if (text.length > 0){
         NSLog(@"Text");
@@ -385,6 +387,13 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
          Message *msg = [[Message alloc] init];
          msg[@"Picture"] = testData[path.row][@"Picture"];
          spvc.message = msg;
+     }
+     else if ([[segue identifier] isEqualToString:@"ShowAudioViewController"]){
+         ShowAudioViewController *savc = [segue destinationViewController];
+         NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+         Message *msg = [[Message alloc] init];
+         msg[@"Audio"] = testData[path.row][@"Audio"];
+         savc.message = msg;
      }
  }
 

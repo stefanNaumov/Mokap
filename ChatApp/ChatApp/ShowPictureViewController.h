@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Message.h"
+
 @interface ShowPictureViewController : UIViewController
 
 @property (nonatomic) Message *message;

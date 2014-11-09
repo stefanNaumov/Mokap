@@ -11,6 +11,7 @@
 		5217712D1A0DA1D700DA9305 /* PictureUITableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5217712C1A0DA1D700DA9305 /* PictureUITableViewCell.xib */; };
 		521771301A0DA20100DA9305 /* PictureUITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5217712F1A0DA20100DA9305 /* PictureUITableViewCell.m */; };
 		521771331A0DCA8D00DA9305 /* ShowPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521771321A0DCA8D00DA9305 /* ShowPictureViewController.m */; };
+		528522AD1A0EE489005E0DEB /* ShowAudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 528522AC1A0EE489005E0DEB /* ShowAudioViewController.m */; };
 		529400361A02884000F93C54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529400351A02884000F93C54 /* Foundation.framework */; };
 		529400381A02884000F93C54 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529400371A02884000F93C54 /* CoreGraphics.framework */; };
 		5294003A1A02884000F93C54 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529400391A02884000F93C54 /* UIKit.framework */; };
@@ -71,6 +72,8 @@
 		5217712F1A0DA20100DA9305 /* PictureUITableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureUITableViewCell.m; sourceTree = "<group>"; };
 		521771311A0DCA8D00DA9305 /* ShowPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowPictureViewController.h; sourceTree = "<group>"; };
 		521771321A0DCA8D00DA9305 /* ShowPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowPictureViewController.m; sourceTree = "<group>"; };
+		528522AB1A0EE489005E0DEB /* ShowAudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowAudioViewController.h; sourceTree = "<group>"; };
+		528522AC1A0EE489005E0DEB /* ShowAudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowAudioViewController.m; sourceTree = "<group>"; };
 		529400321A02884000F93C54 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		529400351A02884000F93C54 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		529400371A02884000F93C54 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -310,6 +313,8 @@
 				52B9096E1A0D006400A17D8C /* ShowLocationViewController.m */,
 				521771311A0DCA8D00DA9305 /* ShowPictureViewController.h */,
 				521771321A0DCA8D00DA9305 /* ShowPictureViewController.m */,
+				528522AB1A0EE489005E0DEB /* ShowAudioViewController.h */,
+				528522AC1A0EE489005E0DEB /* ShowAudioViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -428,6 +433,11 @@
 				84A79AE31A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m in Sources */,
 				849998281A0E176400933216 /* ChatAppDataModel.xcdatamodeld in Sources */,
 				5294004C1A02884100F93C54 /* MainViewController.m in Sources */,
+<<<<<<< Updated upstream
+=======
+				8499982B1A0E17DF00933216 /* ChatUser.m in Sources */,
+				528522AD1A0EE489005E0DEB /* ShowAudioViewController.m in Sources */,
+>>>>>>> Stashed changes
 				84928DE21A09153200168208 /* ChatSessionViewController.m in Sources */,
 				521771301A0DA20100DA9305 /* PictureUITableViewCell.m in Sources */,
 				84E668FB1A0EE733003565E1 /* ChatUser.m in Sources */,
