@@ -22,12 +22,20 @@
     UIButton *deleteHistoryBtn;
     UIImage *deleteBtnImage;
     UIBarButtonItem *barItem;
+    ChatUser *logged;
+    NSArray *pfUsersFiltered;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    dataHelper = [[CoreDataHelper alloc] init];
+    [dataHelper setupCoreData];
+    
     loggedUser = [PFUser currentUser];
+    
+    logged = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUser" inManagedObjectContext:dataHelper.context];
+    logged.username = loggedUser.username;
     
     deleteBtnImage = [UIImage imageNamed:@"Delete-button"];
     deleteHistoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -49,8 +57,7 @@
     [self.tableView addGestureRecognizer:gestureRecLeft];
     [self.tableView addGestureRecognizer:gestRecRight];
     
-    dataHelper = [[CoreDataHelper alloc] init];
-    [dataHelper setupCoreData];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -66,7 +73,14 @@
 }
 
 -(void) deleteHistory{
-    NSLog(@"DELETINGGGGG");
+    
+    for (ChatUsers *userChatConnection in logged.chatUsers) {
+        [dataHelper.context deleteObject:userChatConnection];
+    }
+    self.users = nil;
+    [self.tableView reloadData];
+    
+    [dataHelper saveContext];
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -74,9 +88,6 @@
 }
 
 -(void) saveUsersToDataBase{
-    
-    ChatUser *logged = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUser" inManagedObjectContext:dataHelper.context];
-    logged.username = loggedUser.username;
     
     ChatUsers *otherUserModel = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUsers" inManagedObjectContext:dataHelper.context];
     otherUserModel.username = otherUser.username;
@@ -160,7 +171,7 @@
 - (IBAction)swipeFilterUsers:(UIGestureRecognizer *)sender {
     
     NSArray *fetched = [self fetchUsers];
-    NSArray *pfUsersFiltered = [self getPfUsers:fetched];
+    pfUsersFiltered = [self getPfUsers:fetched];
     
     UISwipeGestureRecognizerDirection direction = [(UISwipeGestureRecognizer *) sender direction ];
     switch (direction) {
