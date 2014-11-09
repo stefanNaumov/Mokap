@@ -9,19 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ChatUser;
+@class ChatUsers;
 
 @interface ChatUser : NSManagedObject
 
 @property (nonatomic, retain) NSString * username;
-@property (nonatomic, retain) NSSet *chatters;
+@property (nonatomic, retain) NSSet *chatUsers;
 @end
 
 @interface ChatUser (CoreDataGeneratedAccessors)
 
-- (void)addChattersObject:(ChatUser *)value;
-- (void)removeChattersObject:(ChatUser *)value;
-- (void)addChatters:(NSSet *)values;
-- (void)removeChatters:(NSSet *)values;
+- (void)addChatUsersObject:(ChatUsers *)value;
+- (void)removeChatUsersObject:(ChatUsers *)value;
+- (void)addChatUsers:(NSSet *)values;
+- (void)removeChatUsers:(NSSet *)values;
 
 @end

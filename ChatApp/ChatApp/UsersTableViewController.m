@@ -60,23 +60,10 @@
     ChatUser *logged = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUser" inManagedObjectContext:dataHelper.context];
     logged.username = loggedUser.username;
     
-    ChatUser *otherUserModel = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUser" inManagedObjectContext:dataHelper.context];
+    ChatUsers *otherUserModel = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUsers" inManagedObjectContext:dataHelper.context];
     otherUserModel.username = otherUser.username;
     
-    NSMutableSet *chattersSet;
-    if (!logged.chatters) {
-        
-        chattersSet = [[NSMutableSet alloc] init];
-        [chattersSet addObject:otherUser];
-        
-        logged.chatters = chattersSet;
-    }
-    else{
-        chattersSet = [logged.chatters mutableCopy];
-        [chattersSet addObject:otherUserModel];
-        
-        logged.chatters = chattersSet;
-    }
+    [logged addChatUsersObject:otherUserModel];
     
     [dataHelper.context insertObject:logged];
     [dataHelper.context insertObject:otherUserModel];
@@ -88,20 +75,23 @@
 
 -(NSArray *) fetchUsers{
     
-    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"ChatUser"];
+    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:@"ChatUsers"];
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"username" ascending:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user.username LIKE %@",loggedUser.username];
+    
+    [req setPredicate:predicate];
     [req setSortDescriptors:[NSArray arrayWithObject:sort]];
     
     //TODO pass the fetched array to tableview and reload it
     NSArray *fetched = [dataHelper.context executeFetchRequest:req error:nil];
     
-//    for (ChatUser *user in fetched) {
-//        NSLog(@"%@",user.username);
-//        
-//        for (ChatUser *chatter in user.chatters) {
-//            NSLog(@"Chatters: %@",chatter.username);
-//        }
-//    }
+    //    for (ChatUser *user in fetched) {
+    //        NSLog(@"%@",user.username);
+    //
+    //        for (ChatUser *chatter in user.chatters) {
+    //            NSLog(@"Chatters: %@",chatter.username);
+    //        }
+    //    }
     
     return fetched;
 }
@@ -109,13 +99,13 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
+    
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    
     // Return the number of rows in the section.
     return [self.users count];
 }
@@ -146,7 +136,7 @@
     ChatSessionViewController *controller = [segue destinationViewController];
     [controller setLoggedUser:loggedUser];
     [controller setOtherUser:otherUser];
-
+    
 }
 
 - (IBAction)swipeFilterUsers:(UIGestureRecognizer *)sender {
@@ -161,12 +151,11 @@
             self.users = allUsersBackup;
             [self.tableView reloadData];
             break;
-            case UISwipeGestureRecognizerDirectionRight:
+        case UISwipeGestureRecognizerDirectionRight:
             
             //backup all users
             allUsersBackup = self.users;
             
-            //filter users
             self.users = pfUsersFiltered;
             [self.tableView reloadData];
             break;
@@ -192,48 +181,47 @@
     return filtered;
 }
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 @end

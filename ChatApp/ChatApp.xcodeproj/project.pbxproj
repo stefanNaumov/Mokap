@@ -36,9 +36,10 @@
 		849998231A0E16DB00933216 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 849998221A0E16DB00933216 /* CoreDataHelper.m */; };
 		849998251A0E173100933216 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849998241A0E173100933216 /* CoreData.framework */; };
 		849998281A0E176400933216 /* ChatAppDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 849998261A0E176400933216 /* ChatAppDataModel.xcdatamodeld */; };
-		8499982B1A0E17DF00933216 /* ChatUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499982A1A0E17DF00933216 /* ChatUser.m */; };
 		8499982D1A0E692700933216 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8499982C1A0E692700933216 /* MapKit.framework */; };
 		84A79AE31A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A79AE21A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m */; };
+		84E668FB1A0EE733003565E1 /* ChatUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E668FA1A0EE733003565E1 /* ChatUser.m */; };
+		84E668FE1A0EE748003565E1 /* ChatUsers.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E668FD1A0EE748003565E1 /* ChatUsers.m */; };
 		84EBCCAA1A02DE7500C97E72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */; };
 		84EBCCAC1A02DEBC00C97E72 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */; };
 		84EBCCAE1A02DEE400C97E72 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84EBCCAD1A02DEE400C97E72 /* CoreLocation.framework */; };
@@ -108,11 +109,13 @@
 		849998221A0E16DB00933216 /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		849998241A0E173100933216 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		849998271A0E176400933216 /* ChatAppDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatAppDataModel.xcdatamodel; sourceTree = "<group>"; };
-		849998291A0E17DF00933216 /* ChatUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatUser.h; sourceTree = "<group>"; };
-		8499982A1A0E17DF00933216 /* ChatUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatUser.m; sourceTree = "<group>"; };
 		8499982C1A0E692700933216 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		84A79AE11A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeScreenAnimationsGenerator.h; sourceTree = "<group>"; };
 		84A79AE21A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeScreenAnimationsGenerator.m; sourceTree = "<group>"; };
+		84E668F91A0EE733003565E1 /* ChatUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatUser.h; sourceTree = "<group>"; };
+		84E668FA1A0EE733003565E1 /* ChatUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatUser.m; sourceTree = "<group>"; };
+		84E668FC1A0EE748003565E1 /* ChatUsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatUsers.h; sourceTree = "<group>"; };
+		84E668FD1A0EE748003565E1 /* ChatUsers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatUsers.m; sourceTree = "<group>"; };
 		84EBCCA91A02DE7500C97E72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		84EBCCAB1A02DEBC00C97E72 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		84EBCCAD1A02DEE400C97E72 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -231,8 +234,10 @@
 				5294004D1A02884100F93C54 /* Images.xcassets */,
 				5294003C1A02884000F93C54 /* Supporting Files */,
 				849998261A0E176400933216 /* ChatAppDataModel.xcdatamodeld */,
-				849998291A0E17DF00933216 /* ChatUser.h */,
-				8499982A1A0E17DF00933216 /* ChatUser.m */,
+				84E668FC1A0EE748003565E1 /* ChatUsers.h */,
+				84E668FD1A0EE748003565E1 /* ChatUsers.m */,
+				84E668F91A0EE733003565E1 /* ChatUser.h */,
+				84E668FA1A0EE733003565E1 /* ChatUser.m */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -417,14 +422,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E668FE1A0EE748003565E1 /* ChatUsers.m in Sources */,
 				52D376C61A0ACD0A000DF7EF /* MessageBalloonUITableViewCell.m in Sources */,
 				5217712B1A0D79E100DA9305 /* Message.m in Sources */,
 				84A79AE31A0C4AFC006F4876 /* HomeScreenAnimationsGenerator.m in Sources */,
 				849998281A0E176400933216 /* ChatAppDataModel.xcdatamodeld in Sources */,
 				5294004C1A02884100F93C54 /* MainViewController.m in Sources */,
-				8499982B1A0E17DF00933216 /* ChatUser.m in Sources */,
 				84928DE21A09153200168208 /* ChatSessionViewController.m in Sources */,
 				521771301A0DA20100DA9305 /* PictureUITableViewCell.m in Sources */,
+				84E668FB1A0EE733003565E1 /* ChatUser.m in Sources */,
 				848FB9111A07AED00014EDBC /* ChatAppNavigationController.m in Sources */,
 				52B9096F1A0D006400A17D8C /* ShowLocationViewController.m in Sources */,
 				849998231A0E16DB00933216 /* CoreDataHelper.m in Sources */,

@@ -9,8 +9,8 @@
 #import "CoreDataHelper.h"
 
 @implementation CoreDataHelper
-
-NSString *storeFilename = @"CDatabase.sqlite";
+//CDatabase.sql
+NSString *storeFilename = @"Database.sqlite";
 
 - (id)init
 {

@@ -2,9 +2,14 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="ChatUser" representedClassName="ChatUser" syncable="YES">
         <attribute name="username" attributeType="String" syncable="YES"/>
-        <relationship name="chatters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChatUser" syncable="YES"/>
+        <relationship name="chatUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChatUsers" inverseName="user" inverseEntity="ChatUsers" syncable="YES"/>
+    </entity>
+    <entity name="ChatUsers" representedClassName="ChatUsers" syncable="YES">
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatUser" inverseName="chatUsers" inverseEntity="ChatUser" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ChatUser" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="ChatUsers" positionX="-218" positionY="-123" width="128" height="73"/>
+        <element name="ChatUser" positionX="-18" positionY="27" width="128" height="73"/>
     </elements>
 </model>

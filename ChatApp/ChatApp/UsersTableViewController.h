@@ -11,6 +11,7 @@
 #import "ChatSessionViewController.h"
 #import "CoreDataHelper.h"
 #import "ChatUser.h"
+#import "ChatUsers.h"
 
 @interface UsersTableViewController : UITableViewController<UIGestureRecognizerDelegate>
 

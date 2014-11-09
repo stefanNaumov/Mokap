@@ -1,18 +1,18 @@
 //
-//  ChatUser.m
+//  ChatUsers.m
 //  ChatApp
 //
 //  Created by admin on 11/8/14.
 //  Copyright (c) 2014 admin. All rights reserved.
 //
 
-#import "ChatUser.h"
 #import "ChatUsers.h"
+#import "ChatUser.h"
 
 
-@implementation ChatUser
+@implementation ChatUsers
 
 @dynamic username;
-@dynamic chatUsers;
+@dynamic user;
 
 @end
