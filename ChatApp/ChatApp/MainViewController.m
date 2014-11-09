@@ -68,12 +68,9 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
         else{
             loginAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username or password incorrect!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             [loginAlertView show];
+            _passwordInput.text = @"";
         }
     }];
-    
-    //clear inputs
-    self.userNameInput.text = @"";
-    self.passwordInput.text = @"";
 }
 
 //respond UIAlert view cancel button click by triggerring the usersTableViewSegue

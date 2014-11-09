@@ -34,12 +34,6 @@
     
     location = self.otherUser[@"location"];
     
-    
-
-    NSLog(@"%@",location);
-    
-    [[[UIAlertView alloc] initWithTitle:@"Other username is: " message:[NSString stringWithFormat:@"You chat with: %@", self.otherUser.username] delegate:nil cancelButtonTitle:@"Бегам!" otherButtonTitles:nil, nil] show];
-    
     CLLocationCoordinate2D coord;
     coord.longitude = location.longitude;
     coord.latitude = location.latitude;

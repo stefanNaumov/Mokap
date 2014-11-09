@@ -16,7 +16,6 @@
     NSDate *dateBeforeNewMessages;
     ChatAppNavigationController *navController;
     CLLocation *userLocation;
-    CGPoint originalCenter;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -65,6 +64,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Hide send button if no message in the textField
+    self.title = [NSString stringWithFormat:@"Chat with: '%@'", self.otherUser.username];
     self.sendMessageButton.hidden = YES;
     [self.messageToSend addTarget:self action:@selector(userTextInputChanged)forControlEvents:UIControlEventEditingChanged];
     
@@ -72,7 +72,6 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     dateBeforeNewMessages = [[NSDate alloc] init];
     testData = [[NSMutableArray alloc] init];
     navController = [ChatAppNavigationController sharedSingleton];
-    originalCenter = self.view.center;
     
     // Register Nib Cell
     UINib *cellNib = [UINib nibWithNibName:CellIdentifier bundle:[NSBundle mainBundle]];
