@@ -12,6 +12,8 @@
 
 @end
 
+static NSString *DefaultControllerTitle = @"Chat People List";
+
 @implementation UsersTableViewController{
     PFUser *loggedUser;
     PFUser *otherUser;
@@ -30,6 +32,7 @@
     [super viewDidLoad];
     
     dataHelper = [[CoreDataHelper alloc] init];
+    self.title = DefaultControllerTitle;
     [dataHelper setupCoreData];
    
     //self.navigationController.navigationBar.tintColor = [UIColor redColor];
@@ -175,10 +178,17 @@
     
     NSArray *fetched = [self fetchUsers];
     pfUsersFiltered = [self getPfUsers:fetched];
+    static NSString *historyTitle = @"History";
     
     UISwipeGestureRecognizerDirection direction = [(UISwipeGestureRecognizer *) sender direction ];
     switch (direction) {
         case UISwipeGestureRecognizerDirectionLeft:
+            if ([self.title isEqualToString:DefaultControllerTitle]) {
+                return;
+            }
+            
+            // Reset Title
+            self.title = DefaultControllerTitle;
             
             //remove delete history button
             self.navigationItem.rightBarButtonItem = nil;
@@ -188,6 +198,12 @@
             [self.tableView reloadData];
             break;
         case UISwipeGestureRecognizerDirectionRight:
+            if ([self.title isEqualToString:historyTitle]) {
+                return;
+            }
+            
+            // Reset Title
+            self.title = historyTitle;
             
             //backup all users
             allUsersBackup = self.users;
