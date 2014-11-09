@@ -28,56 +28,80 @@ static const int CAPITALS_HEIGHT = 60;
 -(id) initWithViewController:(UIViewController *)controller{
     self = [super self];
     if (self) {
+        
         _controller = controller;
         orangeColor = [UIColor colorWithRed:240.0/255 green:180.0/255 blue:70.0/255 alpha:1.0];
         lightGreenColor = [UIColor colorWithRed:150.0/255 green:182.0/255 blue:90.0/255 alpha:1.0];
         brownred = [UIColor colorWithRed:200.0/255 green:160.0/255 blue:110.0/255 alpha:1.0];
+        
         //default start width value
         CGFloat size = 10;
         cChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size, 0, RECT_SIZE, CAPITALS_HEIGHT)];
         [cChatLabel setBackgroundColor:brownred];
         [cChatLabel setText:@"C"];
         [self setFontProperties:cChatLabel];
+        [self addConstraints:cChatLabel];
+        [self addFrame:cChatLabel];
         [_controller.view addSubview:cChatLabel];
+        
+        
         hChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
         [hChatLabel setBackgroundColor:lightGreenColor];
         [hChatLabel setText:@"h"];
         [self setFontProperties:hChatLabel];
+        [self addConstraints:hChatLabel];
+        [self addFrame:hChatLabel];
         [controller.view addSubview:hChatLabel];
+        
         size = size + RECT_SIZE;
         aChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
         [aChatLabel setBackgroundColor:orangeColor];
         [aChatLabel setText:@"a"];
         [self setFontProperties:aChatLabel];
+        [self addConstraints:aChatLabel];
+        [self addFrame:aChatLabel];
         [controller.view addSubview:aChatLabel];
+        
         size = size + RECT_SIZE;
         tChatLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
         [tChatLabel setBackgroundColor:lightGreenColor];
         [tChatLabel setText:@"t"];
         [self setFontProperties:tChatLabel];
+        [self addConstraints:tChatLabel];
+        [self addFrame:tChatLabel];
         [controller.view addSubview:tChatLabel];
+        
         size = size + RECT_SIZE;
         aAppLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE,
                                                               CAPITALS_HEIGHT)];
         [aAppLabel setBackgroundColor:brownred];
         [aAppLabel setText:@"A"];
         [self setFontProperties:aAppLabel];
+        [self addConstraints:aAppLabel];
+        [self addFrame:aAppLabel];
         [controller.view addSubview:aAppLabel];
+        
         size = size + RECT_SIZE;
         pAppLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
         [pAppLabel setBackgroundColor:lightGreenColor];
         [pAppLabel setText:@"p"];
         [self setFontProperties:pAppLabel];
+        [self addConstraints:pAppLabel];
+        [self addFrame:pAppLabel];
         [controller.view addSubview:pAppLabel];
+        
         size = size + RECT_SIZE;
         secPappLabel = [[UILabel alloc] initWithFrame:CGRectMake(size + RECT_SIZE, 0, RECT_SIZE, RECT_SIZE)];
         [secPappLabel setBackgroundColor:orangeColor];
         [secPappLabel setText:@"p"];
         [self setFontProperties:secPappLabel];
+        [self addConstraints:secPappLabel];
+        [self addFrame:secPappLabel];
         [controller.view addSubview:secPappLabel];
     }
     return self;
 }
+
 -(void) generateAnimations{
     //same for both halfs of the elements
     _animator = [[UIDynamicAnimator alloc] initWithReferenceView:_controller.view];
@@ -99,12 +123,25 @@ static const int CAPITALS_HEIGHT = 60;
     [secondHalfDynamic setElasticity:[self generateRandom:0.6 and:0.9]];
     [_animator addBehavior:secondHalfDynamic];
 }
+
 -(void) setFontProperties:(UILabel *)label{
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setFont:[UIFont fontWithName:@"Trebuchet MS" size:30]];
 }
+
 -(float) generateRandom:(float) lower and: (float)upper{
     float diff = upper - lower;
     return (((float) rand() / RAND_MAX) * diff) + lower;
+}
+
+-(void) addConstraints:(UILabel *) label{
+    
+    label.translatesAutoresizingMaskIntoConstraints = YES;
+}
+
+-(void) addFrame:(UILabel *) label{
+    CGRect frame = label.frame;
+    frame.size.width += 1.0;
+    label.frame = frame;
 }
 @end
