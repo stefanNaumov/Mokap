@@ -19,12 +19,26 @@
     NSArray *allUsersBackup;
     UISwipeGestureRecognizer *gestureRecLeft;
     UISwipeGestureRecognizer *gestRecRight;
+    UIButton *deleteHistoryBtn;
+    UIImage *deleteBtnImage;
+    UIBarButtonItem *barItem;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     loggedUser = [PFUser currentUser];
+    
+    deleteBtnImage = [UIImage imageNamed:@"Delete-button"];
+    deleteHistoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [deleteHistoryBtn setImage:deleteBtnImage forState:UIControlStateNormal];
+    deleteHistoryBtn.showsTouchWhenHighlighted = YES;
+    deleteHistoryBtn.frame = CGRectMake(0.0, 0.0, deleteBtnImage.size.width / 2,
+                                        deleteBtnImage.size.height / 2);
+    
+    [deleteHistoryBtn addTarget:self action:@selector(deleteHistory) forControlEvents:UIControlEventTouchUpInside];
+    
+    barItem = [[UIBarButtonItem alloc] initWithCustomView:deleteHistoryBtn];
     
     gestureRecLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeFilterUsers:)];
     gestureRecLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -49,6 +63,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) deleteHistory{
+    NSLog(@"DELETINGGGGG");
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -147,6 +165,10 @@
     UISwipeGestureRecognizerDirection direction = [(UISwipeGestureRecognizer *) sender direction ];
     switch (direction) {
         case UISwipeGestureRecognizerDirectionLeft:
+            
+            //remove delete history button
+            self.navigationItem.rightBarButtonItem = nil;
+            
             //reload all users
             self.users = allUsersBackup;
             [self.tableView reloadData];
@@ -155,6 +177,9 @@
             
             //backup all users
             allUsersBackup = self.users;
+            
+            //put remove history button
+            self.navigationItem.rightBarButtonItem = barItem;
             
             self.users = pfUsersFiltered;
             [self.tableView reloadData];
