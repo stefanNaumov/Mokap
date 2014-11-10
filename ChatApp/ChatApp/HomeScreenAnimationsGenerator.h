@@ -13,7 +13,6 @@
 }
 
 -(id) initWithViewController: (UIViewController *) controller;
-//+(ChangeView *) sharedSingleton;
 
 -(void) generateAnimations;
 

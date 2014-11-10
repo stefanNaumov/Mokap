@@ -17,21 +17,24 @@
     HomeScreenAnimationsGenerator *animationsGenerator;
     ChatAppNavigationController *navController;
     CLLocation *userLocation;
+    ButtonStyleSetter *btnStyleSetter;
 }
 
-static NSString *MostImportantConstantEver = @"Welcome To ChatApp!";
+static NSString *homeScreenTitle = @"Welcome To ChatApp!";
 static NSString *usersTableViewSegue = @"usersTableViewSegue";
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = MostImportantConstantEver;
+    self.title = homeScreenTitle;
+    btnStyleSetter = [ButtonStyleSetter sharedSingleton];
+    
     navController = [ChatAppNavigationController sharedSingleton];
     
     animationsGenerator = [[HomeScreenAnimationsGenerator alloc] initWithViewController:self];
-    [animationsGenerator generateAnimations];
     
-    [self setButtonStyles];
+    [self loadButtonStyles];
+    [animationsGenerator generateAnimations];
     
 }
 
@@ -39,6 +42,16 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) loadButtonStyles{
+    [btnStyleSetter setBackgroundColor:self.signInButton withColorRed:190.0 colorGreen:150.0 colorBLue:117.0 alpha:0.3];
+    [btnStyleSetter setBorderWidth:self.signInButton withBorderWith:0.8f];
+    [btnStyleSetter setCornerRadius:self.signInButton withRadius:35.0f];
+    
+    [btnStyleSetter setBackgroundColor:self.signUpButton withColorRed:255.0 colorGreen:153.0 colorBLue:51.0 alpha:0.3];
+    [btnStyleSetter setBorderWidth:self.signUpButton withBorderWith:0.8f];
+    [btnStyleSetter setCornerRadius:self.signUpButton withRadius:35.0];
 }
 
 //action for logging the user and setting user's coordinates from current user position
@@ -50,17 +63,15 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     NSString *password = self.passwordInput.text;
     
     //hide keyboard
-    [self.userNameInput resignFirstResponder];
-    [self.passwordInput resignFirstResponder];
+    [self textFieldShouldReturn:self.userNameInput];
+    [self textFieldShouldReturn:self.passwordInput];
     
-    //[navController]
     PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLocation:userLocation];
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         UIAlertView *loginAlertView;
         if (!error) {
             user[@"location"] = geoPoint;
-            //NSLog(@"%@",geoPoint);
             [user saveEventually];
             
             loginAlertView = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Logged in!" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -103,17 +114,6 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
             
         }];
     }
-}
-
--(void) setButtonStyles{
-    
-    self.signInButton.layer.borderWidth = 0.8f;
-    self.signInButton.layer.cornerRadius = 35.0f;
-    self.signInButton.layer.backgroundColor = [UIColor colorWithRed:190.0/255.0 green:150.0/255.0 blue:117/255.0 alpha:0.3].CGColor;
-    
-    self.signUpButton.layer.borderWidth = 0.8f;
-    self.signUpButton.layer.cornerRadius = 35.0f;
-    self.signUpButton.layer.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:153.0/255.0 blue:51/255.0 alpha:0.3].CGColor;
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

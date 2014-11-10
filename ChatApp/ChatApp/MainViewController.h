@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "ChatAppNavigationController.h"
 #import "HomeScreenAnimationsGenerator.h"
+#import "ButtonStyleSetter.h"
 
 @interface MainViewController : UIViewController<UIAlertViewDelegate>
 
