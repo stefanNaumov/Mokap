@@ -99,21 +99,11 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     _stubCell = [cellNib instantiateWithOwner:nil options:nil][0];
     
     [self loadLatestMessageHistory];
-    
-    // Refresh messages every 1.0 sec.
-    SEL refreshForNewMessagesSelector = @selector(refreshForNewMessages);
-    [self callSelector:refreshForNewMessagesSelector Every:1.0];
-    
-    SEL refreshUserLocationSelector = @selector(refreshUserLocation);
-    [self callSelector:refreshUserLocationSelector Every:5.0];
 }
 
 -(void)refreshUserLocation{
-    userLocation = navController.locationManager.location;
-    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLocation:userLocation];
-    
-    self.loggedUser[@"location"] = geoPoint;
-    [self.loggedUser saveEventually];
+    [navController uploadUserLocation:self.loggedUser];
+    NSLog(@"ChatSession - refreshUserLocation");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -382,6 +372,13 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
                                              selector:@selector(keyboardWillHide)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    // Refresh messages every 1.0 sec.
+    SEL refreshForNewMessagesSelector = @selector(refreshForNewMessages);
+    [self callSelector:refreshForNewMessagesSelector Every:1.0];
+    
+    SEL refreshUserLocationSelector = @selector(refreshUserLocation);
+    [self callSelector:refreshUserLocationSelector Every:5.0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -407,6 +404,7 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
      {
          ShowLocationViewController *slvc = [segue destinationViewController];
          slvc.otherUser = self.otherUser;
+         slvc.loggedUser = self.loggedUser;
      }
      else if ([[segue identifier] isEqualToString:@"ShowPictureViewController"]){
          ShowPictureViewController *spvc = [segue destinationViewController];

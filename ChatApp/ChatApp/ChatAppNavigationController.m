@@ -73,4 +73,12 @@
 -(CLLocation *) getDidUpdateLocation{
     return location;
 }
+
+-(void)uploadUserLocation:(PFUser *)user{
+    CLLocation *userLocation = locationManager.location;
+    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLocation:userLocation];
+    
+    user[@"location"] = geoPoint;
+    [user saveEventually];
+}
 @end

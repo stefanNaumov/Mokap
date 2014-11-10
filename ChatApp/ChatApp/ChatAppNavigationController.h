@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <Parse/Parse.h>
 
 @interface ChatAppNavigationController : NSObject<CLLocationManagerDelegate>
 
@@ -16,5 +17,7 @@
 +(ChatAppNavigationController *)sharedSingleton;
 
 -(CLLocation *) getDidUpdateLocation;
+
+-(void)uploadUserLocation: (PFUser*) user;
 
 @end

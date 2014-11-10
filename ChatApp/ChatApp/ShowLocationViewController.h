@@ -10,9 +10,11 @@
 #import <Parse/Parse.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "ChatAppNavigationController.h"
 
 @interface ShowLocationViewController : UIViewController<MKMapViewDelegate>
 
+@property (nonatomic) PFUser *loggedUser;
 @property (nonatomic) PFUser *otherUser;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 

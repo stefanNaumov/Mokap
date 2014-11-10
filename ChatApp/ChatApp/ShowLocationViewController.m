@@ -13,6 +13,8 @@
     PFGeoPoint *location;
     MKCoordinateRegion region;
     MKPointAnnotation *annotation;
+    ChatAppNavigationController *navController;
+    NSTimer *timer;
 }
 @end
 
@@ -53,6 +55,29 @@
     
 }
 
+-(void)refreshUserLocation{
+    NSLog(@"%@", self.loggedUser.username);
+    [navController uploadUserLocation:self.loggedUser];
+    NSLog(@"ShowLocation - refreshUserLocation");
+}
+
+-(void)callSelector:(SEL)selector Every: (double) second{
+    timer = [NSTimer scheduledTimerWithTimeInterval:second target:self selector:selector userInfo:nil repeats:YES];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    SEL refreshUserLocationSelector = @selector(refreshUserLocation);
+    [self callSelector:refreshUserLocationSelector Every:5.0];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if (timer.isValid) {
+        [timer invalidate];
+    }
+    timer = nil;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -61,7 +86,7 @@
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     
-    }
+}
 
 /*
 #pragma mark - Navigation
