@@ -18,6 +18,4 @@
 
 -(CLLocation *) getDidUpdateLocation;
 
--(void)uploadUserLocation: (PFUser*) user;
-
 @end

@@ -14,6 +14,7 @@
     MKCoordinateRegion region;
     MKPointAnnotation *annotation;
     ChatAppNavigationController *navController;
+    CLLocation *userLocation;
     NSTimer *timer;
 }
 @end
@@ -56,8 +57,11 @@
 }
 
 -(void)refreshUserLocation{
-    NSLog(@"%@", self.loggedUser.username);
-    [navController uploadUserLocation:self.loggedUser];
+    userLocation = navController.locationManager.location;
+    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLocation:userLocation];
+    
+    self.loggedUser[@"location"] = geoPoint;
+    [self.loggedUser saveEventually];
     NSLog(@"ShowLocation - refreshUserLocation");
 }
 

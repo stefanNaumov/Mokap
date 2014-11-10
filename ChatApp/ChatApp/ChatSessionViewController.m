@@ -102,7 +102,11 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 }
 
 -(void)refreshUserLocation{
-    [navController uploadUserLocation:self.loggedUser];
+    userLocation = navController.locationManager.location;
+    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLocation:userLocation];
+    
+    self.loggedUser[@"location"] = geoPoint;
+    [self.loggedUser saveEventually];
     NSLog(@"ChatSession - refreshUserLocation");
 }
 
