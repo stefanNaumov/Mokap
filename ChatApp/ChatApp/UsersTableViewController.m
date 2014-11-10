@@ -104,6 +104,7 @@ static NSString *DefaultControllerTitle = @"Chat People List";
 }
 
 -(void)historyBackAction{
+    self.title = DefaultControllerTitle;
     [self loadAllUsers];
 }
 

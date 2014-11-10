@@ -18,7 +18,7 @@
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    [self.window setTintColor:[UIColor colorWithRed:220.0/255 green:140.0/255 blue:85.0/255 alpha:1.0]];
+    [self.window setTintColor:[UIColor colorWithRed:240.0/255 green:140.0/255 blue:85.0/255 alpha:1.0]];
     // Override point for customization after application launch.
     return YES;
 }
