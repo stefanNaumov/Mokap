@@ -18,6 +18,8 @@
     ChatAppNavigationController *navController;
     CLLocation *userLocation;
     ButtonStyleSetter *btnStyleSetter;
+    UIBarButtonItem *logOutBtn;
+    
 }
 
 static NSString *homeScreenTitle = @"Welcome To ChatApp!";
@@ -36,6 +38,9 @@ static NSString *usersTableViewSegue = @"usersTableViewSegue";
     [self loadButtonStyles];
     [animationsGenerator generateAnimations];
     
+    logOutBtn = [[UIBarButtonItem alloc] init];
+    logOutBtn.title = @"LogOut";
+    self.navigationItem.backBarButtonItem = logOutBtn;
 }
 
 - (void)didReceiveMemoryWarning

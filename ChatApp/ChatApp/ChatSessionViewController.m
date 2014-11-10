@@ -34,15 +34,17 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
 
 @implementation ChatSessionViewController
 
--(UIColor *) weakGreenColor {return [UIColor colorWithRed:232.0f/255.0f
-                                                    green:245.0f/255.0f
-                                                     blue:232.0f/255.0f
-                                                    alpha:1.0f];
+-(UIColor *) weakGreenColor {return [UIColor colorWithRed:220.0/255.0f
+                                                    green:145.0f/255.0f
+                                                     blue:82.0f/255.0f
+                                                    alpha:0.4f];
 }
+
+
 -(UIColor *) weakRedColor {return [UIColor colorWithRed:247.0f/255.0f
                                                   green:220.0f/255.0f
                                                    blue:220.0f/255.0f
-                                                  alpha:1.0f];
+                                                  alpha:0.8f];
 }
 
 - (void)userTextInputChanged {
@@ -81,8 +83,8 @@ static NSString *CellIdentifier = @"PictureUITableViewCell";
     // Hide send button if no message in the textField
     self.title = [NSString stringWithFormat:@"Chat with: '%@'", self.otherUser.username];
     self.sendMessageButton.hidden = YES;
-    [self.view setBackgroundColor: self.weakGreenColor];
-    [self.tableView setBackgroundColor:self.weakGreenColor];
+//    [self.view setBackgroundColor: self.weakGreenColor];
+//    [self.tableView setBackgroundColor:self.weakGreenColor];
     [self.messageToSend addTarget:self action:@selector(userTextInputChanged)forControlEvents:UIControlEventEditingChanged];
     
     // Initialize

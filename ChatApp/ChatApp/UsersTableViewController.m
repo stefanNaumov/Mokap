@@ -21,38 +21,42 @@ static NSString *DefaultControllerTitle = @"Chat People List";
     NSArray *allUsersBackup;
     UISwipeGestureRecognizer *gestureRecLeft;
     UISwipeGestureRecognizer *gestRecRight;
-    UIButton *deleteHistoryBtn;
-    UIImage *deleteBtnImage;
     UIBarButtonItem *barItem;
+    UIBarButtonItem *historyBackBarItem;
     ChatUser *logged;
     NSArray *pfUsersFiltered;
+    UIBarButtonItem *defaultNavBarBackBtn;
+    UIButton *historyBackBtn;
+    UIButton *deleteHistoryBtn;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = DefaultControllerTitle;
+    
+    UIAlertView *swipeAlert = [[UIAlertView alloc] initWithTitle:@"Welcome" message:@"Swipe for history" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    [swipeAlert show];
     
     dataHelper = [[CoreDataHelper alloc] init];
-    self.title = DefaultControllerTitle;
     [dataHelper setupCoreData];
-   
-    //self.navigationController.navigationBar.tintColor = [UIColor redColor];
     
     loggedUser = [PFUser currentUser];
-    
     logged = [NSEntityDescription insertNewObjectForEntityForName:@"ChatUser" inManagedObjectContext:dataHelper.context];
     logged.username = loggedUser.username;
+    
     [dataHelper.context insertObject:logged];
+   
+    //save the default back button so we can swap it with our custom one
+    defaultNavBarBackBtn = self.navigationItem.backBarButtonItem;
+    [defaultNavBarBackBtn setTitle:@"LogOut"];
     
-    deleteBtnImage = [UIImage imageNamed:@"clear_history"];
+    //custom back button for returning from swipe right
+    historyBackBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    //custom button for deleting user's history
     deleteHistoryBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [deleteHistoryBtn setImage:deleteBtnImage forState:UIControlStateNormal];
-    deleteHistoryBtn.showsTouchWhenHighlighted = YES;
-    deleteHistoryBtn.frame = CGRectMake(0.0, 0.0, deleteBtnImage.size.width / 2,
-                                        deleteBtnImage.size.height / 2);
     
-    [deleteHistoryBtn addTarget:self action:@selector(deleteHistory) forControlEvents:UIControlEventTouchUpInside];
-    
-    barItem = [[UIBarButtonItem alloc] initWithCustomView:deleteHistoryBtn];
+    [self loadCustomNavBarButtons];
     
     gestureRecLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeFilterUsers:)];
     gestureRecLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -62,7 +66,6 @@ static NSString *DefaultControllerTitle = @"Chat People List";
     
     [self.tableView addGestureRecognizer:gestureRecLeft];
     [self.tableView addGestureRecognizer:gestRecRight];
-    
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -76,6 +79,32 @@ static NSString *DefaultControllerTitle = @"Chat People List";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) loadCustomNavBarButtons{
+    
+    historyBackBtn.showsTouchWhenHighlighted = YES;
+    [historyBackBtn setTitle:@"Back" forState:UIControlStateNormal];
+    historyBackBtn.frame = CGRectMake(0.0, 0.0, 50, 30);
+    [historyBackBtn setTitleColor:[UIColor colorWithRed:220.0/255 green:140.0/255 blue:85.0/255 alpha:1.0] forState:UIControlStateNormal];
+    [historyBackBtn addTarget:self action:@selector(historyBackAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImage *deleteBtnImage = [UIImage imageNamed:@"clear_history"];
+    
+    
+    [deleteHistoryBtn setImage:deleteBtnImage forState:UIControlStateNormal];
+    deleteHistoryBtn.showsTouchWhenHighlighted = YES;
+    deleteHistoryBtn.frame = CGRectMake(0.0, 0.0, deleteBtnImage.size.width / 2,
+                                        deleteBtnImage.size.height / 2);
+    [deleteHistoryBtn addTarget:self action:@selector(deleteHistory) forControlEvents:UIControlEventTouchUpInside];
+    
+    historyBackBarItem = [[UIBarButtonItem alloc] initWithCustomView:historyBackBtn];
+    
+    barItem = [[UIBarButtonItem alloc] initWithCustomView:deleteHistoryBtn];
+}
+
+-(void)historyBackAction{
+    [self loadAllUsers];
 }
 
 -(void) deleteHistory{
@@ -190,19 +219,22 @@ static NSString *DefaultControllerTitle = @"Chat People List";
             // Reset Title
             self.title = DefaultControllerTitle;
             
+            //resetBackButton
+            self.navigationItem.leftBarButtonItem = defaultNavBarBackBtn;
+            self.navigationItem.hidesBackButton = NO;
+            
             //remove delete history button
             self.navigationItem.rightBarButtonItem = nil;
             
             //reload all users
-            self.users = allUsersBackup;
-            [self.tableView reloadData];
+            [self loadAllUsers];
             break;
         case UISwipeGestureRecognizerDirectionRight:
             if ([self.title isEqualToString:historyTitle]) {
                 return;
             }
             
-            // Reset Title
+            // Set Title
             self.title = historyTitle;
             
             //backup all users
@@ -210,6 +242,8 @@ static NSString *DefaultControllerTitle = @"Chat People List";
             
             //put remove history button
             self.navigationItem.rightBarButtonItem = barItem;
+           
+            self.navigationItem.leftBarButtonItem = historyBackBarItem;
             
             self.users = pfUsersFiltered;
             [self.tableView reloadData];
@@ -217,6 +251,11 @@ static NSString *DefaultControllerTitle = @"Chat People List";
         default:
             break;
     }
+}
+
+-(void) loadAllUsers{
+    self.users = allUsersBackup;
+    [self.tableView reloadData];
 }
 
 -(NSArray *) getPfUsers:(NSArray *) fetchedUsersFromDatabase{
